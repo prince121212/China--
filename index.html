@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>瓷里 · 景德镇东方器物志</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%239a493d'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='36' fill='white' font-family='serif'%3E%E7%93%B7%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #172522;
+            --ink-soft: #56635f;
+            --paper: #f4f1ea;
+            --paper-light: #fbfaf6;
+            --porcelain: #fffefa;
+            --blue: #234f63;
+            --blue-deep: #153746;
+            --celadon: #a8b9ac;
+            --gold: #b78a4e;
+            --red: #9a493d;
+            --line: rgba(23, 37, 34, 0.12);
+        }
+        /* Small, local utility layer: keeps the page self-contained without a CSS framework runtime. */
+        .hidden { display:none !important; }
+        .fixed { position:fixed; } .absolute { position:absolute; } .relative { position:relative; }
+        .inset-0 { inset:0; } .top-1\/2 { top:50%; } .left-1\/2 { left:50%; } .left-3 { left:.75rem; } .right-3 { right:.75rem; } .bottom-4 { bottom:1rem; }
+        .z-\[100\] { z-index:100; } .z-\[110\] { z-index:110; }
+        .flex { display:flex; } .grid { display:grid; } .flex-1 { flex:1 1 0%; } .flex-col { flex-direction:column; }
+        .grid-cols-1 { grid-template-columns:repeat(1,minmax(0,1fr)); }
+        .items-center { align-items:center; } .items-start { align-items:flex-start; } .justify-center { justify-content:center; } .justify-between { justify-content:space-between; }
+        .gap-1 { gap:.25rem; } .gap-2 { gap:.5rem; } .gap-3 { gap:.75rem; } .gap-4 { gap:1rem; } .gap-6 { gap:1.5rem; }
+        .space-x-2 > :not([hidden]) ~ :not([hidden]) { margin-left:.5rem; }
+        .space-y-2 > :not([hidden]) ~ :not([hidden]) { margin-top:.5rem; }
+        .space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top:1rem; }
+        .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top:1.5rem; }
+        .w-4 { width:1rem; } .w-5 { width:1.25rem; } .w-6 { width:1.5rem; } .w-10 { width:2.5rem; } .w-full { width:100%; }
+        .h-4 { height:1rem; } .h-5 { height:1.25rem; } .h-6 { height:1.5rem; } .h-10 { height:2.5rem; } .h-full { height:100%; }
+        .max-w-sm { max-width:24rem; } .max-w-4xl { max-width:56rem; } .max-w-7xl { max-width:80rem; } .max-w-\[280px\] { max-width:280px; }
+        .max-h-\[90vh\] { max-height:90vh; } .mx-auto { margin-left:auto; margin-right:auto; }
+        .mb-2 { margin-bottom:.5rem; } .mb-3 { margin-bottom:.75rem; } .mb-4 { margin-bottom:1rem; } .mb-6 { margin-bottom:1.5rem; } .mb-8 { margin-bottom:2rem; } .ml-2 { margin-left:.5rem; }
+        .p-2 { padding:.5rem; } .p-4 { padding:1rem; } .p-6 { padding:1.5rem; }
+        .px-3 { padding-left:.75rem; padding-right:.75rem; } .px-4 { padding-left:1rem; padding-right:1rem; }
+        .py-1 { padding-top:.25rem; padding-bottom:.25rem; } .py-1\.5 { padding-top:.375rem; padding-bottom:.375rem; } .py-2 { padding-top:.5rem; padding-bottom:.5rem; } .py-3 { padding-top:.75rem; padding-bottom:.75rem; } .py-8 { padding-top:2rem; padding-bottom:2rem; } .py-16 { padding-top:4rem; padding-bottom:4rem; }
+        .pb-2 { padding-bottom:.5rem; } .pl-10 { padding-left:2.5rem; } .pr-4 { padding-right:1rem; }
+        .overflow-hidden { overflow:hidden; } .overflow-x-auto { overflow-x:auto; } .overflow-y-auto { overflow-y:auto; }
+        .aspect-square { aspect-ratio:1 / 1; } .object-contain { object-fit:contain; }
+        .border { border-width:1px; border-style:solid; } .border-b { border-bottom-width:1px; border-bottom-style:solid; }
+        .border-stone-100 { border-color:#f5f5f4; } .border-stone-200 { border-color:#e7e5e4; }
+        .rounded-full { border-radius:9999px; } .rounded-lg { border-radius:.5rem; } .rounded-xl { border-radius:.75rem; } .rounded-2xl { border-radius:1rem; }
+        .bg-white { background:#fff; } .bg-white\/90 { background:rgba(255,255,255,.9); } .bg-stone-50 { background:#fafaf9; } .bg-stone-100 { background:#f5f5f4; } .bg-amber-100 { background:#fef3c7; }
+        .bg-black\/60 { background:rgba(0,0,0,.6); } .bg-black\/70 { background:rgba(0,0,0,.7); }
+        .bg-gradient-to-r { background-image:linear-gradient(to right,#d97706,#b45309); }
+        .text-center { text-align:center; } .whitespace-nowrap { white-space:nowrap; }
+        .text-sm { font-size:.875rem; line-height:1.25rem; } .text-lg { font-size:1.125rem; line-height:1.75rem; } .text-xl { font-size:1.25rem; line-height:1.75rem; } .text-3xl { font-size:1.875rem; line-height:2.25rem; }
+        .font-semibold { font-weight:600; } .font-bold { font-weight:700; }
+        .text-white { color:#fff; } .text-amber-600 { color:#d97706; } .text-amber-700 { color:#b45309; }
+        .text-stone-400 { color:#a8a29e; } .text-stone-500 { color:#78716c; } .text-stone-600 { color:#57534e; } .text-stone-800 { color:#292524; }
+        .shadow-sm { box-shadow:0 1px 2px rgba(0,0,0,.05); } .shadow-lg { box-shadow:0 10px 15px -3px rgba(0,0,0,.1); } .hover\:shadow-xl:hover { box-shadow:0 20px 25px -5px rgba(0,0,0,.12); }
+        .outline-none { outline:2px solid transparent; outline-offset:2px; }
+        .transform { transform:translate(var(--tx,0),var(--ty,0)); } .-translate-y-1\/2 { --ty:-50%; } .-translate-x-1\/2 { --tx:-50%; }
+        .transition-all { transition:all .2s ease; } .transition-colors { transition:color .2s ease,background-color .2s ease,border-color .2s ease; }
+        .hover\:bg-stone-100:hover { background:#f5f5f4; } .hover\:bg-stone-50:hover { background:#fafaf9; } .hover\:bg-white:hover { background:#fff; }
+        .hover\:border-amber-600:hover { border-color:#d97706; } .hover\:text-amber-600:hover { color:#d97706; }
+        .focus\:border-transparent:focus { border-color:transparent; } .focus\:ring-2:focus { box-shadow:0 0 0 2px rgba(35,79,99,.18); }
+        .antialiased { -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+        @media (min-width:640px) { .sm\:px-6 { padding-left:1.5rem; padding-right:1.5rem; } .sm\:p-6 { padding:1.5rem; } }
+        @media (min-width:1024px) { .lg\:px-8 { padding-left:2rem; padding-right:2rem; } .lg\:grid-cols-2 { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            font-family: 'Noto Sans SC', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 12% 4%, rgba(168, 185, 172, .18), transparent 28rem),
+                var(--paper-light);
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 999;
+            opacity: .025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+        }
+        h1, h2, h3, h4, .serif { font-family: 'Noto Serif SC', 'Songti SC', serif; }
+        button, input, select { font: inherit; }
+        button, a { -webkit-tap-highlight-color: transparent; }
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 80;
+            height: 76px;
+            border-bottom: 1px solid rgba(23, 37, 34, .08);
+            background: rgba(251, 250, 246, .88);
+            backdrop-filter: blur(18px) saturate(140%);
+        }
+        .header-inner {
+            width: min(1240px, calc(100% - 48px));
+            height: 100%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 28px;
+        }
+        .brand { display: flex; align-items: center; gap: 13px; color: var(--ink); text-decoration: none; }
+        .brand-seal {
+            width: 43px;
+            height: 43px;
+            display: grid;
+            place-items: center;
+            color: #fff;
+            border-radius: 5px 12px 5px 12px;
+            background: var(--red);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,.2), 0 8px 24px rgba(154,73,61,.2);
+            font: 600 23px/1 'Noto Serif SC', serif;
+        }
+        .brand-name { display: block; font: 600 19px/1.2 'Noto Serif SC', serif; letter-spacing: .08em; }
+        .brand-en { display: block; margin-top: 4px; color: #7b8581; font-size: 9px; letter-spacing: .24em; }
+        .main-nav { display: flex; align-items: center; gap: 34px; margin-left: auto; }
+        .main-nav a {
+            position: relative;
+            color: #44514d;
+            font-size: 14px;
+            text-decoration: none;
+            transition: color .25s ease;
+        }
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 100%;
+            bottom: -8px;
+            height: 1px;
+            background: var(--red);
+            transition: right .25s ease;
+        }
+        .main-nav a:hover { color: var(--ink); }
+        .main-nav a:hover::after { right: 0; }
+        .header-actions { display: flex; align-items: center; gap: 10px; }
+        .header-contact {
+            min-height: 42px;
+            padding: 0 19px;
+            border: 1px solid var(--ink);
+            border-radius: 999px;
+            color: #fff;
+            background: var(--ink);
+            cursor: pointer;
+            font-size: 13px;
+            transition: transform .25s ease, background .25s ease;
+        }
+        .header-contact:hover { transform: translateY(-2px); background: var(--blue-deep); }
+        .mobile-menu-btn { display: none; border: 0; background: transparent; cursor: pointer; color: var(--ink); }
+        .mobile-nav { display: none; }
+
+        .hero {
+            position: relative;
+            min-height: 540px;
+            overflow: hidden;
+            background: #14201e;
+            isolation: isolate;
+        }
+        .hero-media, .hero-media::after { position: absolute; inset: 0; }
+        .hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 52%; }
+        .hero-media::after {
+            content: '';
+            background:
+                linear-gradient(90deg, rgba(8,16,15,.88) 0%, rgba(8,16,15,.60) 43%, rgba(8,16,15,.08) 78%),
+                linear-gradient(0deg, rgba(8,16,15,.5), transparent 45%);
+        }
+        .hero-inner {
+            position: relative;
+            z-index: 2;
+            width: min(1240px, calc(100% - 48px));
+            min-height: 540px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            padding: 54px 0 68px;
+        }
+        .hero-copy { width: min(710px, 66%); color: #fff; }
+        .hero-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; color: #d8cbb7; font-size: 11px; letter-spacing: .25em; }
+        .hero-eyebrow::before { content: ''; width: 38px; height: 1px; background: var(--gold); }
+        .hero h1 { margin: 0; font-size: clamp(42px, 5.4vw, 70px); font-weight: 500; line-height: 1.2; letter-spacing: .035em; }
+        .hero h1 em { color: #e5d1aa; font-style: normal; }
+        .hero-description { width: min(560px, 100%); margin: 24px 0 30px; color: rgba(255,255,255,.73); font-size: 15px; line-height: 1.9; letter-spacing: .04em; }
+        .hero-actions { display: flex; align-items: center; gap: 14px; }
+        .hero-primary, .hero-secondary {
+            min-height: 48px;
+            padding: 0 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            transition: transform .25s ease, background .25s ease, border-color .25s ease;
+        }
+        .hero-primary { color: var(--ink); border: 1px solid #f1e6d2; background: #f1e6d2; }
+        .hero-secondary { color: #fff; border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.05); }
+        .hero-primary:hover, .hero-secondary:hover { transform: translateY(-2px); }
+        .hero-secondary:hover { border-color: rgba(255,255,255,.7); background: rgba(255,255,255,.11); }
+        .hero-note {
+            position: absolute;
+            right: 0;
+            bottom: 52px;
+            width: 270px;
+            padding: 21px 22px;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,.18);
+            background: rgba(17,29,27,.56);
+            backdrop-filter: blur(12px);
+        }
+        .hero-note-top { display: flex; justify-content: space-between; color: #d7c59e; font-size: 10px; letter-spacing: .18em; }
+        .hero-note strong { display: block; margin: 10px 0 5px; font: 500 18px/1.45 'Noto Serif SC', serif; }
+        .hero-note p { margin: 0; color: rgba(255,255,255,.58); font-size: 12px; line-height: 1.7; }
+        .hero-index { position: absolute; left: 0; bottom: 20px; color: rgba(255,255,255,.48); font-size: 10px; letter-spacing: .2em; }
+
+        .value-strip {
+            position: relative;
+            z-index: 5;
+            width: min(1160px, calc(100% - 48px));
+            margin: -34px auto 0;
+            display: grid;
+            grid-template-columns: 1.25fr repeat(3, 1fr);
+            color: var(--ink);
+            border: 1px solid rgba(23,37,34,.08);
+            background: rgba(255,254,250,.96);
+            box-shadow: 0 24px 70px rgba(35,45,42,.11);
+        }
+        .value-intro, .value-item { min-height: 112px; padding: 24px 27px; display: flex; align-items: center; }
+        .value-intro { gap: 17px; background: var(--blue-deep); color: #fff; }
+        .value-seal { color: #d7c59e; font: 500 31px/1 'Noto Serif SC', serif; }
+        .value-intro strong { display: block; font: 500 16px/1.4 'Noto Serif SC', serif; }
+        .value-intro span { color: rgba(255,255,255,.55); font-size: 10px; letter-spacing: .12em; }
+        .value-item { gap: 13px; border-left: 1px solid var(--line); }
+        .value-number { color: var(--blue); font: 500 30px/1 'Noto Serif SC', serif; }
+        .value-text strong { display: block; margin-bottom: 4px; font-size: 13px; }
+        .value-text span { color: #8a938f; font-size: 11px; }
+
+        .editorial-main { max-width: 1240px !important; padding-top: 90px !important; padding-bottom: 40px !important; }
+        .catalog-search-row { display: flex; align-items: stretch; gap: 12px; }
+        .search-box-wrap { flex: 1; }
+        .search-box-wrap > svg { color: #8c9792; }
+        #searchInput { height: 58px; padding-left: 48px; padding-right: 80px; border: 1px solid rgba(23,37,34,.14); border-radius: 2px; color: var(--ink); background: rgba(255,254,250,.9); box-shadow: 0 10px 28px rgba(23,37,34,.05); font-size: 14px; }
+        #searchInput::placeholder { color: #9aa39f; }
+        #searchInput:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(35,79,99,.08), 0 12px 30px rgba(23,37,34,.06); }
+        #clearSearchBtn { position: absolute; top: 50%; right: 18px; width: 25px; height: 25px; transform: translateY(-50%); border: 0; border-radius: 50%; color: #65736d; background: #e9ece7; cursor: pointer; font-size: 18px; line-height: 1; }
+        #clearSearchBtn:hover { color: #fff; background: var(--blue); }
+        #viewModeBtn { width: 58px; min-width: 58px; display: grid; place-items: center; border: 1px solid rgba(23,37,34,.14); border-radius: 2px; color: var(--ink); background: rgba(255,254,250,.9); cursor: pointer; transition: all .25s ease; }
+        #viewModeBtn:hover { color: #fff; border-color: var(--blue-deep); background: var(--blue-deep); }
+        .catalog-categories { padding: 3px 0 5px; }
+        .catalog-categories h3 { margin: 0; font: 500 25px/1.4 'Noto Serif SC',serif; color: var(--ink); }
+        .catalog-categories > div:first-child { display:flex; align-items:center; justify-content:space-between; margin-bottom: 15px; }
+        .catalog-kicker { display: block; margin-bottom: 6px; color: var(--gold); font-size: 10px; letter-spacing: .22em; }
+        .category-hint { color: #9aa39f; font-size: 11px; }
+        #categoryContainer { display: flex; gap: 8px; padding: 1px 1px 9px; overflow-x: auto; }
+        #categoryContainer .category-filter { min-height: 39px; display: inline-flex; align-items: center; gap: 9px; padding: 0 15px; border: 1px solid rgba(23,37,34,.13); border-radius: 999px; color: #63706b; background: rgba(255,254,250,.85); cursor: pointer; white-space: nowrap; font-size: 12px; transition: all .22s ease; }
+        #categoryContainer .category-filter small { color: #a7b0aa; font-size: 10px; }
+        #categoryContainer .category-filter:hover { color: var(--blue); border-color: rgba(35,79,99,.5); transform: translateY(-1px); }
+        #categoryContainer .category-filter.category-active { box-shadow: 0 8px 18px rgba(21,55,70,.16); }
+        #categoryContainer .category-filter.category-active small { color: rgba(255,255,255,.65); }
+        .results-toolbar { min-height: 48px; padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+        .result-summary { display:flex; align-items:center; gap: 9px; color: #77837e; font-size: 12px; }
+        .result-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px rgba(183,138,78,.12); }
+        .sort-control { display:flex; align-items:center; gap: 10px; color:#8b9691; font-size: 12px; }
+        #sortSelect { min-width: 128px; padding: 7px 26px 7px 10px; border: 1px solid rgba(23,37,34,.13); border-radius: 2px; color: var(--ink); background: var(--porcelain); outline: none; font-size: 12px; }
+        #sortSelect:focus { border-color: var(--blue); }
+        .loader-wrap { min-height: 290px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; color:#8b9691; font-size: 12px; }
+        .products-grid:not(.hidden) { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+        .products-list:not(.hidden) { display: grid; gap: 13px; }
+        .product-card { position: relative; min-width: 0; overflow: hidden; border: 1px solid rgba(23,37,34,.08); border-radius: 2px; background: var(--porcelain); box-shadow: 0 10px 32px rgba(29,43,39,.07); cursor: pointer; transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
+        .product-card:hover { transform: translateY(-7px); border-color: rgba(35,79,99,.2); box-shadow: 0 22px 46px rgba(29,43,39,.15); }
+        .product-card:focus-visible { outline: 3px solid rgba(183,138,78,.55); outline-offset: 3px; }
+        .product-image-wrap { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: linear-gradient(145deg,#e9e6dc,#f9f8f3); }
+        .product-image-wrap::after { content:''; position:absolute; inset:0; pointer-events:none; background: linear-gradient(140deg, rgba(255,255,255,.18), transparent 38%, rgba(10,30,29,.12)); opacity: .55; transition: opacity .35s ease; }
+        .product-card:hover .product-image-wrap::after { opacity: .2; }
+        .product-image { width:100%; height:100%; display:block; object-fit:cover; transition: transform .7s cubic-bezier(.2,.65,.25,1); }
+        .product-card:hover .product-image { transform: scale(1.06); }
+        .product-index { position:absolute; left:14px; top:14px; z-index:2; color:rgba(255,255,255,.82); font-size:10px; letter-spacing:.12em; text-shadow:0 1px 8px rgba(0,0,0,.5); }
+        .product-badge { position:absolute; right:12px; top:12px; z-index:2; padding:6px 8px; color:var(--ink); border:1px solid rgba(255,255,255,.55); background:rgba(255,254,250,.82); backdrop-filter:blur(8px); font-size:10px; }
+        .product-quick { position:absolute; right:12px; bottom:12px; z-index:3; width:34px; height:34px; display:grid; place-items:center; color:var(--ink); border:0; border-radius:50%; background:rgba(255,254,250,.9); box-shadow:0 8px 18px rgba(0,0,0,.16); opacity:0; transform:translateY(7px); transition:all .3s ease; pointer-events:none; }
+        .product-card:hover .product-quick { opacity:1; transform:translateY(0); }
+        .product-body { padding: 16px 16px 17px; }
+        .product-meta { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:9px; color:#98a19d; font-size:10px; }
+        .product-meta span:first-child { color:var(--blue); }
+        .product-name { margin:0; overflow:hidden; color:var(--ink); font:500 16px/1.45 'Noto Serif SC',serif; text-overflow:ellipsis; white-space:nowrap; }
+        .product-foot { display:flex; align-items:flex-end; justify-content:space-between; gap:10px; margin-top:17px; }
+        .product-price { color:var(--red); font:600 21px/1 'Noto Serif SC',serif; }
+        .product-price small { margin-right:2px; font:500 12px/1 system-ui,sans-serif; }
+        .product-sales { color:#9aa39f; font-size:10px; }
+        .list-product { display:flex; gap:18px; align-items:stretch; padding:12px; border:1px solid rgba(23,37,34,.09); background:var(--porcelain); cursor:pointer; transition:all .28s ease; }
+        .list-product:hover { border-color:rgba(35,79,99,.25); box-shadow:0 12px 32px rgba(29,43,39,.1); transform:translateX(3px); }
+        .list-image-wrap { width:150px; min-width:150px; aspect-ratio:1.15; overflow:hidden; background:#e9e6dc; }
+        .list-image-wrap img { width:100%; height:100%; object-fit:cover; }
+        .list-body { flex:1; display:flex; flex-direction:column; justify-content:space-between; padding:8px 10px 7px 2px; }
+        .list-name { margin:7px 0 0; color:var(--ink); font:500 20px/1.45 'Noto Serif SC',serif; }
+        .list-desc { margin:8px 0 0; color:#8c9792; font-size:12px; }
+        .list-foot { display:flex; align-items:center; justify-content:space-between; margin-top:18px; }
+        .empty-state { grid-column:1/-1; padding:70px 20px; text-align:center; color:#88938e; border:1px dashed rgba(23,37,34,.16); background:rgba(255,254,250,.65); }
+        .empty-state svg { margin:0 auto 15px; color:#b1bbb5; }
+        .load-more-btn { display:flex; align-items:center; gap:12px; margin:28px auto 0; padding:12px 22px; border:1px solid rgba(23,37,34,.18); border-radius:999px; color:var(--blue); background:transparent; cursor:pointer; font-size:12px; transition:all .25s ease; }
+        .load-more-btn:hover { color:#fff; border-color:var(--blue-deep); background:var(--blue-deep); transform:translateY(-2px); }
+
+        .detail-backdrop, .qr-backdrop { background: rgba(7,16,15,.76) !important; backdrop-filter: blur(9px) saturate(85%); }
+        .detail-stage { padding: 28px !important; }
+        .detail-dialog { width: min(1080px, 100%) !important; max-width: none !important; max-height: calc(100vh - 56px) !important; border: 1px solid rgba(255,255,255,.14); border-radius: 4px !important; background: var(--porcelain) !important; box-shadow: 0 35px 110px rgba(0,0,0,.42); }
+        .detail-header { min-height: 76px; padding: 14px 22px 14px 27px !important; background: rgba(255,254,250,.96); border-color: var(--line) !important; }
+        .detail-header > div > span, .qr-header > div > span { display:block; margin-bottom:5px; color:var(--gold); font-size:9px; letter-spacing:.22em; }
+        .detail-header h3 { margin:0; max-width:780px; overflow:hidden; color:var(--ink) !important; font:500 21px/1.4 'Noto Serif SC',serif !important; text-overflow:ellipsis; white-space:nowrap; }
+        .detail-close { width:40px; height:40px; display:grid; place-items:center; padding:0 !important; border:1px solid rgba(23,37,34,.11); border-radius:50% !important; color:var(--ink); background:transparent; cursor:pointer; transition:all .22s ease; }
+        .detail-close:hover { color:#fff; border-color:var(--blue-deep); background:var(--blue-deep) !important; transform:rotate(5deg); }
+        .detail-close svg { width:18px !important; height:18px !important; color:inherit !important; }
+        .detail-content { padding: 0 !important; background: var(--porcelain); }
+        .detail-layout { display:grid !important; grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr) !important; gap:0 !important; }
+        .detail-gallery { min-width:0; padding:26px; background:#eceeea; }
+        .detail-image-stage { aspect-ratio: 4 / 5 !important; max-height: calc(100vh - 210px); margin:0 auto; border:1px solid rgba(23,37,34,.08); border-radius:2px !important; background:#e3e5df !important; }
+        .detail-main-image { object-fit:cover !important; }
+        .carousel-arrow { width:42px !important; height:42px !important; color:var(--ink); border:1px solid rgba(23,37,34,.08); background:rgba(255,254,250,.86) !important; box-shadow:0 8px 26px rgba(0,0,0,.16) !important; backdrop-filter:blur(8px); cursor:pointer; transition:all .22s ease; }
+        .carousel-arrow:hover { color:#fff; background:var(--blue-deep) !important; transform:translateY(-50%) scale(1.05) !important; }
+        .carousel-indicator { width:7px; height:7px; padding:0; border:1px solid rgba(255,255,255,.75); border-radius:999px; background:rgba(255,255,255,.42); cursor:pointer; }
+        .carousel-indicator.active { width:24px; background:#fff; }
+        .detail-thumbnails { margin-top:13px; padding-bottom:0 !important; }
+        .carousel-thumbnail { width:58px; min-width:58px; height:68px; padding:0; overflow:hidden; border:1px solid transparent; border-radius:1px; background:#d8ddd8; cursor:pointer; opacity:.63; transition:all .22s ease; }
+        .carousel-thumbnail:hover, .carousel-thumbnail.active { border-color:var(--blue); opacity:1; transform:translateY(-2px); }
+        .carousel-thumbnail img { width:100%; height:100%; object-fit:cover; }
+        .detail-info { display:flex; flex-direction:column; justify-content:center; padding:34px 38px 38px; }
+        .detail-info > div:first-child > div { gap:7px !important; }
+        #modalCategory1, #modalCategory2 { padding:6px 10px !important; border-radius:999px !important; font-size:10px !important; }
+        #modalCategory1 { color:#fff !important; background:var(--blue-deep) !important; }
+        #modalCategory2 { color:var(--blue) !important; background:#e9efec !important; }
+        #modalHeadCount { margin:11px 0 0; color:#8c9792 !important; font-size:12px !important; }
+        #modalPrice { color:var(--red) !important; font:600 35px/1.15 'Noto Serif SC',serif !important; }
+        #modalSales { color:var(--blue); font-weight:500; }
+        .detail-facts { padding:18px 20px !important; border:1px solid rgba(23,37,34,.08); border-radius:2px !important; background:#f4f3ed !important; }
+        .detail-facts h4 { margin:0 0 12px; color:var(--ink) !important; font:500 16px/1.4 'Noto Serif SC',serif !important; }
+        .detail-facts ul { margin:0; padding:0; list-style:none; }
+        .detail-facts li { color:#687570 !important; font-size:12px !important; }
+        .detail-facts li > span:first-child { color:var(--gold) !important; }
+        .detail-buy { min-height:50px; border:0; border-radius:2px !important; color:#fff; background:var(--blue-deep) !important; box-shadow:0 14px 30px rgba(21,55,70,.2) !important; cursor:pointer; font-size:13px; letter-spacing:.06em; transition:all .25s ease; }
+        .detail-buy:hover { background:var(--red) !important; transform:translateY(-2px); box-shadow:0 17px 34px rgba(154,73,61,.24) !important; }
+        .detail-service-note { margin:-11px 0 0; color:#9aa39f; text-align:center; font-size:10px; letter-spacing:.04em; }
+
+        .qr-stage { padding:20px !important; }
+        .qr-dialog { max-width:392px !important; border:1px solid rgba(255,255,255,.16); border-radius:4px !important; background:var(--porcelain) !important; box-shadow:0 34px 100px rgba(0,0,0,.45); }
+        .qr-header { min-height:80px; padding:15px 18px 14px 23px !important; border-color:var(--line) !important; }
+        .qr-header h3 { margin:0; color:var(--ink) !important; font:500 19px/1.4 'Noto Serif SC',serif !important; }
+        .qr-content { padding:24px 32px 31px !important; }
+        .qr-content img { width:100%; max-width:260px !important; margin:0 auto 18px !important; padding:10px; border:1px solid rgba(23,37,34,.1); border-radius:2px !important; background:#fff; box-shadow:0 12px 35px rgba(23,37,34,.1) !important; }
+        .qr-content p { margin:0 0 7px !important; color:#53615c !important; font-size:12px !important; line-height:1.7; }
+        .qr-content p:last-child { color:#929c97 !important; font-size:11px !important; }
+
+        .site-footer { margin-top:90px; color:rgba(255,255,255,.72); background:var(--ink); }
+        .footer-inner { width:min(1160px,calc(100% - 48px)); margin:0 auto; padding:58px 0 24px; }
+        .footer-brand { display:flex; align-items:center; gap:18px; padding-bottom:36px; border-bottom:1px solid rgba(255,255,255,.12); }
+        .footer-seal { width:52px; height:52px; display:grid; place-items:center; flex:none; border:1px solid rgba(255,255,255,.22); color:#e7d3a8; font:500 27px/1 'Noto Serif SC',serif; }
+        .footer-brand h2 { margin:0; color:#fff; font:500 24px/1.4 'Noto Serif SC',serif; letter-spacing:.06em; }
+        .footer-brand p { margin:7px 0 0; color:rgba(255,255,255,.48); font-size:12px; letter-spacing:.05em; }
+        .footer-grid { display:grid; grid-template-columns:1fr 1fr; gap:70px; padding:36px 0; }
+        .footer-label { color:#c9aa78; font-size:9px; letter-spacing:.24em; }
+        .footer-grid h3 { margin:8px 0 15px; color:#fff; font:500 16px/1.4 'Noto Serif SC',serif; }
+        .footer-grid p { margin:6px 0; color:rgba(255,255,255,.5); font-size:11px; }
+        .footer-grid button { margin-top:12px; padding:0 0 6px; border:0; border-bottom:1px solid rgba(201,170,120,.5); color:#e4d2ad; background:transparent; cursor:pointer; font-size:11px; }
+        .footer-grid button:hover { color:#fff; border-color:#fff; }
+        .footer-bottom { display:flex; align-items:center; justify-content:space-between; padding-top:20px; border-top:1px solid rgba(255,255,255,.12); color:rgba(255,255,255,.32); font-size:9px; letter-spacing:.14em; }
+
+        @media (max-width: 1100px) { .products-grid:not(.hidden) { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+        @media (max-width: 820px) {
+            .detail-stage { padding:10px !important; }
+            .detail-dialog { width:100% !important; height:calc(100dvh - 20px); max-height:calc(100dvh - 20px) !important; }
+            .detail-header { position:sticky; top:0; z-index:12; flex:none; min-height:70px; padding:12px 14px 12px 18px !important; }
+            .detail-header h3 { max-width:calc(100vw - 105px); font-size:18px !important; }
+            .detail-content { overflow-x:hidden !important; overflow-y:auto !important; }
+            .detail-layout { display:grid !important; grid-template-columns:minmax(0,1fr) !important; }
+            .detail-gallery { width:100%; min-width:0; padding:14px; }
+            .detail-image-stage { width:100%; max-height:none; aspect-ratio:4 / 5 !important; }
+            .detail-thumbnails { margin-top:9px; }
+            .carousel-thumbnail { width:49px; min-width:49px; height:57px; }
+            .detail-info { width:100%; padding:24px 20px 30px; }
+            .detail-info.space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top:18px; }
+            .qr-dialog { width:min(100%,380px) !important; }
+        }
+        @media (max-width: 720px) { .products-grid:not(.hidden) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap:12px; } .product-body { padding:13px 12px 14px; } .product-name { font-size:14px; } .product-price { font-size:18px; } .product-sales { font-size:9px; } .product-quick { display:none; } .list-image-wrap { width:112px; min-width:112px; } .list-name { font-size:17px; } }
+        @media (max-width: 480px) { .catalog-search-row { gap:8px; } #viewModeBtn { width:48px; min-width:48px; } .catalog-categories > div:first-child { align-items:flex-end; } .category-hint { display:none; } .editorial-main > .mb-8:first-child > p:last-child { display:none; } .results-toolbar { padding:10px 0; } .sort-control span { display:none; } #sortSelect { min-width:116px; } .products-grid:not(.hidden) { grid-template-columns: repeat(2, minmax(0,1fr)); } .list-product { gap:11px; padding:9px; } .list-image-wrap { width:90px; min-width:90px; } .list-name { font-size:15px; } .list-desc { display:none; } .detail-dialog { border-radius:2px !important; } .detail-gallery { padding:10px; } .detail-info { padding:22px 16px 27px; } .detail-facts { padding:16px !important; } .detail-service-note { font-size:9px; } .qr-stage { padding:10px !important; } .qr-dialog { width:100% !important; } .qr-content { padding:20px 24px 27px !important; } }
+        .card-shadow {
+            box-shadow: 0 10px 32px rgba(29, 43, 39, 0.08);
+        }
+        .card-hover:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 18px 48px rgba(29, 43, 39, 0.14);
+        }
+        .category-active {
+            border-color: var(--blue-deep) !important;
+            background: var(--blue-deep) !important;
+            color: white !important;
+        }
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--blue);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+        }
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .modal-overlay {
+            backdrop-filter: blur(4px);
+        }
+        .carousel-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .carousel-indicator.active {
+            width: 24px;
+            border-radius: 4px;
+        }
+        .fade-in {
+            animation: fadeIn 0.35s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @media (max-width: 900px) {
+            .header-inner, .hero-inner { width: min(100% - 32px, 1240px); }
+            .main-nav, .header-contact { display: none; }
+            .mobile-menu-btn { width: 42px; height: 42px; display: grid; place-items: center; }
+            .mobile-nav { position: absolute; left: 16px; right: 16px; top: 67px; padding: 10px; border: 1px solid var(--line); background: var(--porcelain); box-shadow: 0 18px 50px rgba(23,37,34,.16); }
+            .mobile-nav.open { display: grid; }
+            .mobile-nav a, .mobile-nav button { padding: 13px 14px; color: var(--ink); border: 0; border-bottom: 1px solid rgba(23,37,34,.08); background: transparent; text-align: left; text-decoration: none; font-size: 14px; }
+            .hero-copy { width: 75%; }
+            .hero-note { display: none; }
+            .value-strip { grid-template-columns: 1fr 1fr; }
+            .value-intro { grid-column: 1 / -1; }
+            .value-item:last-child { grid-column: 1 / -1; }
+        }
+        @media (max-width: 600px) {
+            .site-header { height: 68px; }
+            .header-inner { width: calc(100% - 28px); }
+            .brand-seal { width: 39px; height: 39px; font-size: 20px; }
+            .brand-name { font-size: 17px; }
+            .hero, .hero-inner { min-height: 585px; }
+            .hero-media img { object-position: 62% 50%; }
+            .hero-media::after { background: linear-gradient(90deg, rgba(8,16,15,.86), rgba(8,16,15,.4)), linear-gradient(0deg, rgba(8,16,15,.72), transparent 60%); }
+            .hero-inner { width: calc(100% - 32px); align-items: flex-end; padding-bottom: 78px; }
+            .hero-copy { width: 100%; }
+            .hero h1 { font-size: 40px; line-height: 1.3; }
+            .hero-description { font-size: 14px; line-height: 1.8; }
+            .hero-actions { align-items: stretch; }
+            .hero-primary, .hero-secondary { flex: 1; padding: 0 12px; }
+            .hero-index { display: none; }
+            .value-strip { width: calc(100% - 28px); margin-top: -28px; }
+            .value-intro, .value-item { min-height: 96px; padding: 19px; }
+            .value-intro { grid-column: 1 / -1; }
+            .value-number { font-size: 25px; }
+            .value-text span { font-size: 10px; }
+            .editorial-main { padding-top: 68px !important; }
+            #craft { width: calc(100% - 28px) !important; grid-template-columns: 1fr !important; gap: 22px !important; margin-top: 40px !important; }
+            #craft > div:first-child { min-height: 300px !important; }
+            .site-footer { margin-top:64px; }
+            .footer-inner { width:calc(100% - 32px); padding-top:42px; }
+            .footer-brand { align-items:flex-start; padding-bottom:28px; }
+            .footer-seal { width:46px; height:46px; font-size:24px; }
+            .footer-brand h2 { font-size:20px; }
+            .footer-brand p { line-height:1.7; }
+            .footer-grid { grid-template-columns:1fr; gap:28px; padding:30px 0; }
+            .footer-bottom { align-items:flex-start; flex-direction:column; gap:8px; line-height:1.6; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 antialiased">
+    <header class="site-header" id="siteHeader">
+        <div class="header-inner">
+            <a class="brand" href="#siteHeader" aria-label="瓷里首页">
+                <span class="brand-seal">瓷</span>
+                <span>
+                    <span class="brand-name">瓷里 · 景德镇</span>
+                    <span class="brand-en">PORCELAIN OF JINGDEZHEN</span>
+                </span>
+            </a>
+            <nav class="main-nav" aria-label="主导航">
+                <a href="#collection">器物精选</a>
+                <a href="#craft">瓷脉故事</a>
+                <a href="#service">匠心服务</a>
+            </nav>
+            <div class="header-actions">
+                <button class="header-contact" type="button" onclick="showQrcodeModal()">微信咨询</button>
+                <button id="mobileMenuBtn" class="mobile-menu-btn" type="button" aria-label="打开导航" aria-expanded="false">
+                    <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-width="1.6" d="M4 7h16M4 12h16M4 17h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <nav class="mobile-nav" id="mobileNav" aria-label="移动端导航">
+            <a href="#collection">器物精选</a>
+            <a href="#craft">瓷脉故事</a>
+            <a href="#service">匠心服务</a>
+            <button type="button" onclick="showQrcodeModal()">微信咨询</button>
+        </nav>
+    </header>
+
+    <section class="hero" aria-labelledby="heroTitle">
+        <div class="hero-media">
+            <img src="assets/hero.jpg" alt="景德镇青花瓷器陈设">
+        </div>
+        <div class="hero-inner">
+            <div class="hero-copy">
+                <div class="hero-eyebrow">JINGDEZHEN · ORIENTAL LIVING</div>
+                <h1 id="heroTitle">把东方日常，<br><em>用一件瓷器写成。</em></h1>
+                <p class="hero-description">我们从景德镇的窑火与匠人手中，挑选既能融入当代生活、又保留东方气韵的器物。一餐一饮，皆是生活的小小仪式。</p>
+                <div class="hero-actions">
+                    <a class="hero-primary" href="#collection">
+                        浏览精选
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m9 18 6-6-6-6"></path></svg>
+                    </a>
+                    <button class="hero-secondary" type="button" onclick="showQrcodeModal()">专人选瓷</button>
+                </div>
+            </div>
+            <aside class="hero-note" aria-label="本季精选">
+                <div class="hero-note-top"><span>CURATOR'S NOTE</span><span>01</span></div>
+                <strong>青花，是岁月留下的蓝</strong>
+                <p>当青花遇见当代餐桌，古老纹样也能成为日常的风景。</p>
+            </aside>
+            <span class="hero-index">EST. 2026 · JIANGXI CHINA</span>
+        </div>
+    </section>
+
+    <section class="value-strip" aria-label="品牌价值">
+        <div class="value-intro">
+            <span class="value-seal">器</span>
+            <span><strong>器以载道，用以悦心</strong><span>CRAFTED FOR EVERYDAY RITUALS</span></span>
+        </div>
+        <div class="value-item"><span class="value-number">518</span><span class="value-text"><strong>件器物精选</strong><span>覆盖餐具、茶器与陈设</span></span></div>
+        <div class="value-item"><span class="value-number">11</span><span class="value-text"><strong>大器物系列</strong><span>从日用瓷到手绘藏品</span></span></div>
+        <div class="value-item"><span class="value-number">1·1</span><span class="value-text"><strong>专人选瓷服务</strong><span>微信咨询，定制选购建议</span></span></div>
+    </section>
+
+    <main id="collection" class="editorial-main max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="mb-8" style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;">
+            <div>
+                <p style="margin:0 0 10px;color:var(--gold);font-size:11px;letter-spacing:.24em;">THE COLLECTION · 01</p>
+                <h2 style="margin:0;font:500 clamp(30px,4vw,48px)/1.25 'Noto Serif SC',serif;letter-spacing:.03em;color:var(--ink);">日常里的一点东方</h2>
+                <p style="margin:12px 0 0;color:var(--ink-soft);font-size:14px;line-height:1.8;">从一套餐具开始，把器物的温度带回家。</p>
+            </div>
+            <p style="margin:0 0 5px;color:#8b9691;font-size:11px;letter-spacing:.08em;white-space:nowrap;">CURATED OBJECTS / 2026</p>
+        </div>
+        <div class="catalog-search-row mb-8">
+            <div class="relative search-box-wrap">
+                <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <input type="text" id="searchInput" placeholder="搜索器物名称、纹样或系列" 
+                       class="w-full pl-10 pr-4 py-3 bg-white border border-stone-200 rounded-xl focus:ring-2 focus:ring-amber-600 focus:border-transparent outline-none transition-all shadow-sm">
+                <button id="clearSearchBtn" type="button" aria-label="清除搜索" hidden>×</button>
+            </div>
+        </div>
+
+        <div class="catalog-categories mb-6">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="text-lg font-semibold text-stone-800">分类浏览</h3>
+                <button id="viewModeBtn" class="p-2 rounded-lg bg-white border border-stone-200 hover:bg-stone-50" type="button" aria-label="切换为列表视图">
+                    <svg id="gridIcon" class="w-5 h-5 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                    </svg>
+                    <svg id="listIcon" class="w-5 h-5 text-stone-600 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex overflow-x-auto hide-scrollbar space-x-2 pb-2" id="categoryContainer">
+                <button class="category-filter px-4 py-2 rounded-full bg-white border border-stone-200 text-stone-600 text-sm whitespace-nowrap hover:border-amber-600 hover:text-amber-600 transition-all category-active" data-category="全部">全部</button>
+            </div>
+        </div>
+
+        <div class="results-toolbar flex items-center justify-between mb-4">
+            <span class="result-summary"><span class="result-dot"></span><span id="resultCount" class="text-sm text-stone-500">共 0 件商品</span></span>
+            <div class="flex items-center space-x-2">
+                <span class="text-sm text-stone-500">排序:</span>
+                <select id="sortSelect" class="text-sm bg-white border border-stone-200 rounded-lg px-3 py-1.5 focus:ring-2 focus:ring-amber-600 outline-none">
+                    <option value="default">默认</option>
+                    <option value="price-asc">价格从低到高</option>
+                    <option value="price-desc">价格从高到低</option>
+                    <option value="sales">销量优先</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="loader" class="loader-wrap flex justify-center items-center py-16">
+            <div class="loader"></div>
+        </div>
+
+        <div id="productsGrid" class="products-grid hidden">
+        </div>
+
+        <div id="productsList" class="products-list hidden">
+        </div>
+        <button id="loadMoreBtn" class="load-more-btn" type="button" hidden>继续浏览 <span aria-hidden="true">↓</span></button>
+    </main>
+
+    <div id="detailModal" class="detail-modal fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="detail-backdrop absolute inset-0 bg-black/60 modal-overlay" id="modalOverlay"></div>
+        <div class="detail-stage absolute inset-0 flex items-center justify-center p-4">
+            <div class="detail-dialog bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden fade-in flex flex-col">
+                <div class="detail-header flex items-center justify-between p-4 border-b border-stone-100">
+                    <div><span>OBJECT DETAIL</span><h3 id="modalTitle" class="text-xl font-bold text-stone-800"></h3></div>
+                    <button id="closeModalBtn" class="detail-close p-2 rounded-lg hover:bg-stone-100 transition-colors" type="button" aria-label="关闭详情">
+                        <svg class="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="detail-content flex-1 overflow-y-auto p-4 sm:p-6">
+                    <div class="detail-layout grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="detail-gallery space-y-4">
+                            <div class="detail-image-stage relative aspect-square bg-stone-100 rounded-xl overflow-hidden">
+                                <img id="carouselMainImg" alt="" class="detail-main-image w-full h-full object-contain">
+                                <button id="prevBtn" class="carousel-arrow carousel-prev absolute left-3 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-colors" type="button" aria-label="上一张图片">
+                                    <svg class="w-5 h-5 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                    </svg>
+                                </button>
+                                <button id="nextBtn" class="carousel-arrow carousel-next absolute right-3 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-colors" type="button" aria-label="下一张图片">
+                                    <svg class="w-5 h-5 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </button>
+                                <div id="carouselIndicators" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                                </div>
+                            </div>
+                            
+                            <div id="carouselThumbnails" class="detail-thumbnails flex gap-2 overflow-x-auto pb-2 hide-scrollbar">
+                            </div>
+                        </div>
+                        
+                        <div class="detail-info space-y-6">
+                            <div>
+                                <div class="flex items-center gap-3 mb-2">
+                                    <span id="modalCategory1" class="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm"></span>
+                                    <span id="modalCategory2" class="px-3 py-1 bg-stone-100 text-stone-600 rounded-full text-sm"></span>
+                                </div>
+                                <p id="modalHeadCount" class="text-sm text-stone-500"></p>
+                            </div>
+                            
+                            <div>
+                                <span id="modalPrice" class="text-3xl font-bold text-amber-700"></span>
+                                <span class="text-stone-400 ml-2">元</span>
+                            </div>
+                            
+                            <div class="flex items-center gap-4 text-sm text-stone-500">
+                                <span class="flex items-center gap-1">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                    </svg>
+                                    状态：<span id="modalSales"></span>
+                                </span>
+                            </div>
+                            
+                            <div class="detail-facts p-4 bg-stone-50 rounded-xl">
+                                <h4 class="font-semibold text-stone-800 mb-2">器物信息</h4>
+                                <ul class="space-y-2 text-sm text-stone-600">
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-amber-600">•</span>
+                                        <span>材质：景德镇优质陶瓷</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-amber-600">•</span>
+                                        <span>工艺：传统手工制作</span>
+                                    </li>
+                                    <li class="flex items-start gap-2">
+                                        <span class="text-amber-600">•</span>
+                                        <span>产地：江西景德镇</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <button id="buyBtn" class="detail-buy w-full py-3 bg-gradient-to-r from-amber-600 to-amber-700 text-white rounded-xl font-semibold hover:from-amber-700 hover:to-amber-800 transition-all shadow-lg hover:shadow-xl" type="button">
+                                微信咨询获取折扣价
+                            </button>
+                            <p class="detail-service-note">专人一对一服务 · 破损包赔 · 安全包装</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="qrcodeModal" class="qr-modal fixed inset-0 z-[110] hidden" role="dialog" aria-modal="true" aria-labelledby="qrModalTitle">
+        <div class="qr-backdrop absolute inset-0 bg-black/70 modal-overlay" id="qrcodeOverlay"></div>
+        <div class="qr-stage absolute inset-0 flex items-center justify-center p-4">
+            <div class="qr-dialog bg-white rounded-2xl w-full max-w-sm overflow-hidden fade-in">
+                <div class="qr-header flex items-center justify-between p-4 border-b border-stone-100">
+                    <div><span>WECHAT SERVICE</span><h3 id="qrModalTitle" class="text-xl font-bold text-stone-800">扫码联系选瓷顾问</h3></div>
+                    <button id="closeQrcodeBtn" class="detail-close p-2 rounded-lg hover:bg-stone-100 transition-colors" type="button" aria-label="关闭二维码">
+                        <svg class="w-6 h-6 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="qr-content p-6 text-center">
+                    <img src="qrcode.jpg" 
+                         alt="扫码加好友下单" 
+                         class="w-full max-w-[280px] mx-auto rounded-xl shadow-lg mb-4">
+                    <p class="text-stone-600 mb-2">长按二维码识别，或使用微信扫一扫</p>
+                    <p class="text-stone-500 text-sm">获取实拍细节、现货情况与专属报价</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="craft" style="width:min(1160px,calc(100% - 48px));margin:60px auto 0;padding:0 0 24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,6vw,84px);align-items:center;">
+        <div style="position:relative;min-height:360px;">
+            <div style="position:absolute;inset:24px 42px 0 0;overflow:hidden;background:#d8d7cf;box-shadow:0 18px 45px rgba(23,37,34,.12);">
+                <img src="assets/products/231.jpg" alt="手绘茶具细节" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            <div style="position:absolute;right:0;bottom:0;width:42%;height:46%;overflow:hidden;border:10px solid var(--paper-light);background:#d9d3c5;box-shadow:0 15px 35px rgba(23,37,34,.15);">
+                <img src="assets/products/148.jpg" alt="玲珑餐具细节" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+            <span style="position:absolute;left:-8px;top:4px;color:var(--red);font:500 46px/1 'Noto Serif SC',serif;writing-mode:vertical-rl;letter-spacing:.08em;">窑火不息</span>
+        </div>
+        <div>
+            <p style="margin:0 0 12px;color:var(--gold);font-size:11px;letter-spacing:.24em;">THE CRAFT · 02</p>
+            <h2 style="margin:0;color:var(--ink);font:500 clamp(30px,4vw,46px)/1.35 'Noto Serif SC',serif;">一件器物，<br>要经得起时间。</h2>
+            <p style="margin:22px 0 0;color:var(--ink-soft);font-size:14px;line-height:2;">景德镇的故事，从来不只在窑火里。泥土、釉色、手的温度，以及使用它的人，共同完成一件器物的生命。我们更在意它进入日常之后，能否让每一次端起、斟满和分享，都变得从容。</p>
+            <a href="#collection" style="display:inline-flex;align-items:center;gap:10px;margin-top:25px;color:var(--blue);font-size:13px;text-decoration:none;border-bottom:1px solid rgba(35,79,99,.35);padding-bottom:7px;">回到器物精选 <span aria-hidden="true">→</span></a>
+        </div>
+    </section>
+
+    <footer id="service" class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-seal">瓷</span>
+                <div><h2>瓷里 · 景德镇</h2><p>选一件好瓷，让东方器物回到日常。</p></div>
+            </div>
+            <div class="footer-grid">
+                <div><span class="footer-label">SERVICE</span><h3>匠心服务</h3><p>实拍细节确认</p><p>安全包装 · 破损包赔</p></div>
+                <div><span class="footer-label">CONTACT</span><h3>联系我们</h3><p>所在地：江西省景德镇市</p><button type="button" onclick="showQrcodeModal()">微信联系选瓷顾问 →</button></div>
+            </div>
+            <div class="footer-bottom"><span>© 2026 瓷里 · 景德镇</span><span>PORCELAIN OF JINGDEZHEN</span></div>
+        </div>
+    </footer>
+
+
+    <script>
+        const LOCAL_PRODUCT_IDS = new Set([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,148,149,150,151,176,177,178,179,231,232,233,234,296,297,298,299,313,314,315,316,353,354,355,356,399,400,401,402,475,476,477,478,488,489,490,491,492,493,494]);
+        const PAGE_SIZE = 24;
+        const fallbackCache = new Map();
+        let products = [];
+        let currentCategory = '全部';
+        let searchQuery = '';
+        let sortType = 'default';
+        let viewMode = 'grid';
+        let visibleLimit = PAGE_SIZE;
+        let currentCarouselIndex = 0;
+        let currentProductImages = [];
+        let currentProduct = null;
+
+        const $ = (selector, root = document) => root.querySelector(selector);
+        const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+
+        function escapeHtml(value) {
+            return String(value ?? '').replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[char]));
+        }
+
+        function numeric(value) {
+            const result = Number(value);
+            return Number.isFinite(result) ? result : 0;
+        }
+
+        function formatPrice(value) {
+            return new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 0 }).format(numeric(value));
+        }
+
+        function formatHeadCount(value) {
+            const count = numeric(value);
+            return count > 0 ? `${formatPrice(count)}头` : '单品';
+        }
+
+        function fallbackImage(product) {
+            const key = `${product?.['一级分类'] || ''}-${product?.['二级分类'] || ''}`;
+            if (fallbackCache.has(key)) return fallbackCache.get(key);
+            const palettes = [
+                ['#dce7e3','#8aa7a0','#224e62'],
+                ['#ece4d7','#be9760','#70483c'],
+                ['#dfe4ea','#8394aa','#2e5266'],
+                ['#e7e1d7','#b79a75','#555a4d']
+            ];
+            const palette = palettes[Math.abs(key.length) % palettes.length];
+            const label = escapeHtml(product?.['一级分类'] || '景德镇瓷器').slice(0, 10);
+            const sub = escapeHtml(product?.['二级分类'] || '器物精选').slice(0, 12);
+            const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 900"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${palette[0]}"/><stop offset="1" stop-color="#fbfaf6"/></linearGradient><filter id="s"><feGaussianBlur stdDeviation="26"/></filter></defs><rect width="720" height="900" fill="url(#g)"/><circle cx="585" cy="135" r="165" fill="${palette[1]}" opacity=".18" filter="url(#s)"/><path d="M210 540c0-48 23-75 45-104 16-22 24-45 24-82h162c0 37 8 60 24 82 22 29 45 56 45 104 0 103-58 160-150 160s-150-57-150-160Z" fill="#fffefa" stroke="${palette[2]}" stroke-width="7"/><path d="M279 371h162M289 450c48 27 96 27 144 0M280 523c52 27 108 27 160 0" fill="none" stroke="${palette[2]}" stroke-width="6" opacity=".85"/><path d="M350 392c-23 28-25 58-5 83 20-25 18-55-5-83Z" fill="none" stroke="${palette[1]}" stroke-width="5"/><text x="52" y="790" fill="${palette[2]}" font-family="serif" font-size="28" letter-spacing="7">${label}</text><text x="54" y="830" fill="${palette[2]}" opacity=".58" font-family="sans-serif" font-size="15" letter-spacing="3">${sub}</text></svg>`;
+            const source = `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+            fallbackCache.set(key, source);
+            return source;
+        }
+
+        function localImage(product) {
+            const id = numeric(product?.id);
+            return LOCAL_PRODUCT_IDS.has(id) ? `assets/products/${String(id).padStart(3, '0')}.jpg` : '';
+        }
+
+        function imageSources(product) {
+            const links = Array.isArray(product?.['详情图链接']) ? product['详情图链接'].filter(Boolean) : [];
+            const local = localImage(product);
+            if (links.length) {
+                const sources = [...links];
+                if (local) sources[0] = local;
+                return sources;
+            }
+            return [local || fallbackImage(product)];
+        }
+
+        function mountImage(img, product, source) {
+            const fallback = fallbackImage(product);
+            img.referrerPolicy = 'no-referrer';
+            img.loading = img.loading || 'lazy';
+            img.onerror = () => {
+                if (img.dataset.fallback === 'true') return;
+                img.dataset.fallback = 'true';
+                img.src = fallback;
+            };
+            img.src = source || fallback;
+        }
+
+        function setVisible(element, visible) {
+            if (!element) return;
+            element.hidden = !visible;
+            element.classList.toggle('hidden', !visible);
+        }
+
+        function isOpen(element) {
+            return Boolean(element && !element.hidden && !element.classList.contains('hidden'));
+        }
+
+        function renderCategories() {
+            const container = $('#categoryContainer');
+            const counts = products.reduce((map, product) => {
+                const category = product['一级分类'] || '未分类';
+                map.set(category, (map.get(category) || 0) + 1);
+                return map;
+            }, new Map());
+            container.innerHTML = '';
+            const categories = ['全部', ...counts.keys()];
+            categories.forEach(category => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = `category-filter${currentCategory === category ? ' category-active' : ''}`;
+                button.dataset.category = category;
+                button.innerHTML = `<span>${escapeHtml(category)}</span><small>${category === '全部' ? products.length : counts.get(category)}</small>`;
+                button.addEventListener('click', () => {
+                    currentCategory = category;
+                    visibleLimit = PAGE_SIZE;
+                    $$('.category-filter', container).forEach(item => item.classList.toggle('category-active', item === button));
+                    renderProducts();
+                });
+                container.appendChild(button);
+            });
+        }
+
+        function filteredProducts() {
+            let result = products.filter(product => {
+                const categoryMatch = currentCategory === '全部' || product['一级分类'] === currentCategory;
+                if (!categoryMatch) return false;
+                if (!searchQuery) return true;
+                const query = searchQuery.toLocaleLowerCase();
+                return [product['产品名'], product['一级分类'], product['二级分类']]
+                    .filter(Boolean).join(' ').toLocaleLowerCase().includes(query);
+            });
+            if (sortType === 'price-asc') result.sort((a, b) => numeric(a['价格']) - numeric(b['价格']));
+            if (sortType === 'price-desc') result.sort((a, b) => numeric(b['价格']) - numeric(a['价格']));
+            if (sortType === 'sales') result.sort((a, b) => numeric(b['销量']) - numeric(a['销量']));
+            return result;
+        }
+
+        function emptyState() {
+            const node = document.createElement('div');
+            node.className = 'empty-state';
+            node.innerHTML = `<svg width="42" height="42" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path stroke-linecap="round" d="m16.5 16.5 4 4M8.5 11h5"></path></svg><p>没有找到相关器物</p><small>换个关键词或试试其他系列</small>`;
+            return node;
+        }
+
+        function productStatus(product) {
+            const sales = numeric(product['销量']);
+            return sales > 0 ? `已售 ${formatPrice(sales)}` : '现货可询';
+        }
+
+        function createCard(product, position) {
+            const card = document.createElement('article');
+            card.className = 'product-card';
+            card.tabIndex = 0;
+            card.setAttribute('role', 'button');
+            card.setAttribute('aria-label', `查看${product['产品名'] || '器物'}详情`);
+            const source = imageSources(product)[0];
+            const head = formatHeadCount(product['头数']);
+            card.innerHTML = `<div class="product-image-wrap"><span class="product-index">${String(position + 1).padStart(2, '0')}</span><span class="product-badge">${escapeHtml(head)}</span><img class="product-image" alt="${escapeHtml(product['产品名'])}" /><span class="product-quick" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M2.8 12s3.2-5 9.2-5 9.2 5 9.2 5-3.2 5-9.2 5-9.2-5-9.2-5Z"></path><circle cx="12" cy="12" r="2.2"></circle></svg></span></div><div class="product-body"><div class="product-meta"><span>${escapeHtml(product['二级分类'] || '经典系列')}</span><span>${escapeHtml(product['一级分类'] || '')}</span></div><h3 class="product-name">${escapeHtml(String(product['产品名'] || '').trim())}</h3><div class="product-foot"><span class="product-price"><small>¥</small>${formatPrice(product['价格'])}</span><span class="product-sales">${productStatus(product)}</span></div></div>`;
+            mountImage($('.product-image', card), product, source);
+            card.addEventListener('click', () => showDetailModal(product));
+            card.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showDetailModal(product); } });
+            return card;
+        }
+
+        function createListItem(product, position) {
+            const item = document.createElement('article');
+            item.className = 'list-product';
+            item.tabIndex = 0;
+            item.setAttribute('role', 'button');
+            item.setAttribute('aria-label', `查看${product['产品名'] || '器物'}详情`);
+            item.innerHTML = `<div class="list-image-wrap"><img class="list-image" alt="${escapeHtml(product['产品名'])}" /></div><div class="list-body"><div><div class="product-meta"><span>${escapeHtml(product['一级分类'] || '')}</span><span>${escapeHtml(product['二级分类'] || '')}</span></div><h3 class="list-name">${escapeHtml(String(product['产品名'] || '').trim())}</h3><p class="list-desc">${escapeHtml(formatHeadCount(product['头数']))} · 景德镇优质陶瓷 · 传统手工制作</p></div><div class="list-foot"><span class="product-price"><small>¥</small>${formatPrice(product['价格'])}</span><span class="product-sales">${productStatus(product)}</span></div></div>`;
+            mountImage($('.list-image', item), product, imageSources(product)[0]);
+            item.addEventListener('click', () => showDetailModal(product));
+            item.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showDetailModal(product); } });
+            return item;
+        }
+
+        function renderProducts() {
+            const loader = $('#loader');
+            const grid = $('#productsGrid');
+            const list = $('#productsList');
+            const loadMore = $('#loadMoreBtn');
+            setVisible(loader, false);
+            const result = filteredProducts();
+            $('#resultCount').textContent = searchQuery ? `找到 ${result.length} 件器物` : `共 ${result.length} 件器物`;
+            const visible = result.slice(0, visibleLimit);
+            grid.innerHTML = '';
+            list.innerHTML = '';
+            setVisible(grid, viewMode === 'grid');
+            setVisible(list, viewMode === 'list');
+            if (!result.length) {
+                (viewMode === 'grid' ? grid : list).appendChild(emptyState());
+            } else if (viewMode === 'grid') {
+                visible.forEach((product, index) => grid.appendChild(createCard(product, index)));
+            } else {
+                visible.forEach((product, index) => list.appendChild(createListItem(product, index)));
+            }
+            setVisible(loadMore, result.length > visibleLimit);
+            if (result.length > visibleLimit) loadMore.innerHTML = `继续浏览 <span>${visibleLimit} / ${result.length}</span> <span aria-hidden="true">↓</span>`;
+            $('#clearSearchBtn').hidden = !searchQuery;
+        }
+
+        async function loadProducts() {
+            try {
+                const response = await fetch('products.json');
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                products = await response.json();
+                renderCategories();
+                renderProducts();
+            } catch (error) {
+                console.error('加载数据失败:', error);
+                $('#loader').innerHTML = '<p style="color:#8b9691">加载数据失败，请刷新重试</p>';
+            }
+        }
+
+        function updateBodyLock() {
+            document.body.style.overflow = (isOpen($('#detailModal')) || isOpen($('#qrcodeModal'))) ? 'hidden' : '';
+        }
+
+        function showDetailModal(product) {
+            currentProduct = product;
+            currentProductImages = imageSources(product);
+            currentCarouselIndex = 0;
+            $('#modalTitle').textContent = String(product['产品名'] || '').trim();
+            $('#modalCategory1').textContent = product['一级分类'] || '景德镇瓷器';
+            $('#modalCategory2').textContent = product['二级分类'] || '经典系列';
+            $('#modalHeadCount').textContent = `${formatHeadCount(product['头数'])} · 景德镇优质陶瓷`;
+            $('#modalPrice').textContent = `¥${formatPrice(product['价格'])}`;
+            $('#modalSales').textContent = productStatus(product);
+            renderCarousel();
+            setVisible($('#detailModal'), true);
+            updateBodyLock();
+        }
+
+        function hideDetailModal() {
+            setVisible($('#detailModal'), false);
+            updateBodyLock();
+        }
+
+        function renderCarousel() {
+            const mainImg = $('#carouselMainImg');
+            const indicators = $('#carouselIndicators');
+            const thumbnails = $('#carouselThumbnails');
+            const total = currentProductImages.length;
+            if (!total) return;
+            mainImg.alt = currentProduct?.['产品名'] || '';
+            mountImage(mainImg, currentProduct || {}, currentProductImages[currentCarouselIndex]);
+            $('#prevBtn').hidden = total < 2;
+            $('#nextBtn').hidden = total < 2;
+            indicators.innerHTML = '';
+            currentProductImages.forEach((_, index) => {
+                const indicator = document.createElement('button');
+                indicator.type = 'button';
+                indicator.className = `carousel-indicator ${index === currentCarouselIndex ? 'active' : ''}`;
+                indicator.setAttribute('aria-label', `查看第 ${index + 1} 张图片`);
+                indicator.addEventListener('click', () => { currentCarouselIndex = index; renderCarousel(); });
+                indicators.appendChild(indicator);
+            });
+            thumbnails.innerHTML = '';
+            currentProductImages.forEach((source, index) => {
+                const thumbnail = document.createElement('button');
+                thumbnail.type = 'button';
+                thumbnail.className = `carousel-thumbnail ${index === currentCarouselIndex ? 'active' : ''}`;
+                const image = document.createElement('img');
+                image.alt = '';
+                mountImage(image, currentProduct || {}, source);
+                thumbnail.appendChild(image);
+                thumbnail.addEventListener('click', () => { currentCarouselIndex = index; renderCarousel(); });
+                thumbnails.appendChild(thumbnail);
+            });
+        }
+
+        function prevSlide() { if (currentProductImages.length > 1) { currentCarouselIndex = (currentCarouselIndex - 1 + currentProductImages.length) % currentProductImages.length; renderCarousel(); } }
+        function nextSlide() { if (currentProductImages.length > 1) { currentCarouselIndex = (currentCarouselIndex + 1) % currentProductImages.length; renderCarousel(); } }
+
+        function showQrcodeModal() { setVisible($('#qrcodeModal'), true); updateBodyLock(); }
+        function hideQrcodeModal() { setVisible($('#qrcodeModal'), false); updateBodyLock(); }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProducts();
+            $('#searchInput').addEventListener('input', event => { searchQuery = event.target.value.trim(); visibleLimit = PAGE_SIZE; renderProducts(); });
+            $('#clearSearchBtn').addEventListener('click', () => { $('#searchInput').value = ''; searchQuery = ''; visibleLimit = PAGE_SIZE; renderProducts(); $('#searchInput').focus(); });
+            $('#sortSelect').addEventListener('change', event => { sortType = event.target.value; visibleLimit = PAGE_SIZE; renderProducts(); });
+            $('#loadMoreBtn').addEventListener('click', () => { visibleLimit += PAGE_SIZE; renderProducts(); });
+            $('#viewModeBtn').addEventListener('click', () => {
+                viewMode = viewMode === 'grid' ? 'list' : 'grid';
+                setVisible($('#gridIcon'), viewMode === 'grid');
+                setVisible($('#listIcon'), viewMode === 'list');
+                $('#viewModeBtn').setAttribute('aria-label', viewMode === 'grid' ? '切换为列表视图' : '切换为网格视图');
+                renderProducts();
+            });
+            $('#mobileMenuBtn').addEventListener('click', () => {
+                const nav = $('#mobileNav');
+                const isOpen = nav.classList.toggle('open');
+                $('#mobileMenuBtn').setAttribute('aria-expanded', String(isOpen));
+            });
+            $$('#mobileNav a, #mobileNav button').forEach(link => link.addEventListener('click', () => { $('#mobileNav').classList.remove('open'); $('#mobileMenuBtn').setAttribute('aria-expanded', 'false'); }));
+            $('#closeModalBtn').addEventListener('click', hideDetailModal);
+            $('#modalOverlay').addEventListener('click', hideDetailModal);
+            $('#prevBtn').addEventListener('click', prevSlide);
+            $('#nextBtn').addEventListener('click', nextSlide);
+            $('#buyBtn').addEventListener('click', showQrcodeModal);
+            $('#closeQrcodeBtn').addEventListener('click', hideQrcodeModal);
+            $('#qrcodeOverlay').addEventListener('click', hideQrcodeModal);
+            window.addEventListener('scroll', () => $('#siteHeader')?.classList.toggle('is-scrolled', window.scrollY > 12), { passive: true });
+        });
+
+        document.addEventListener('keydown', event => {
+            if (event.key === '/' && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') { event.preventDefault(); $('#searchInput')?.focus(); }
+            if (isOpen($('#qrcodeModal'))) { if (event.key === 'Escape') hideQrcodeModal(); return; }
+            if (isOpen($('#detailModal'))) { if (event.key === 'Escape') hideDetailModal(); if (event.key === 'ArrowLeft') prevSlide(); if (event.key === 'ArrowRight') nextSlide(); }
+        });
+    </script>
+</body>
+</html>
