@@ -7,7 +7,7 @@
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%239a493d'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-size='36' fill='white' font-family='serif'%3E%E7%93%B7%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600&amp;family=Noto+Serif+SC:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
     <style>
         :root {
             --ink: #172522;
@@ -71,6 +71,7 @@
         html { scroll-behavior: smooth; }
         body {
             margin: 0;
+            overflow-x: hidden;
             font-family: 'Noto Sans SC', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--ink);
             background:
@@ -88,7 +89,7 @@
         }
         h1, h2, h3, h4, .serif { font-family: 'Noto Serif SC', 'Songti SC', serif; }
         button, input, select { font: inherit; }
-        button, a { -webkit-tap-highlight-color: transparent; }
+        button, a { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
         .site-header {
             position: sticky;
             top: 0;
@@ -275,7 +276,7 @@
         .loader-wrap { min-height: 290px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; color:#8b9691; font-size: 12px; }
         .products-grid:not(.hidden) { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
         .products-list:not(.hidden) { display: grid; gap: 13px; }
-        .product-card { position: relative; min-width: 0; overflow: hidden; border: 1px solid rgba(23,37,34,.08); border-radius: 2px; background: var(--porcelain); box-shadow: 0 10px 32px rgba(29,43,39,.07); cursor: pointer; transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
+        .product-card { position: relative; min-width: 0; overflow: hidden; border: 1px solid rgba(23,37,34,.08); border-radius: 2px; background: var(--porcelain); box-shadow: 0 10px 32px rgba(29,43,39,.07); cursor: pointer; content-visibility:auto; contain-intrinsic-size:300px 460px; transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
         .product-card:hover { transform: translateY(-7px); border-color: rgba(35,79,99,.2); box-shadow: 0 22px 46px rgba(29,43,39,.15); }
         .product-card:focus-visible { outline: 3px solid rgba(183,138,78,.55); outline-offset: 3px; }
         .product-image-wrap { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: linear-gradient(145deg,#e9e6dc,#f9f8f3); }
@@ -320,16 +321,31 @@
         .detail-content { padding: 0 !important; background: var(--porcelain); }
         .detail-layout { display:grid !important; grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr) !important; gap:0 !important; }
         .detail-gallery { min-width:0; padding:26px; background:#eceeea; }
-        .detail-image-stage { aspect-ratio: 4 / 5 !important; max-height: calc(100vh - 210px); margin:0 auto; border:1px solid rgba(23,37,34,.08); border-radius:2px !important; background:#e3e5df !important; }
-        .detail-main-image { object-fit:cover !important; }
-        .carousel-arrow { width:42px !important; height:42px !important; color:var(--ink); border:1px solid rgba(23,37,34,.08); background:rgba(255,254,250,.86) !important; box-shadow:0 8px 26px rgba(0,0,0,.16) !important; backdrop-filter:blur(8px); cursor:pointer; transition:all .22s ease; }
+        .detail-image-stage { aspect-ratio: 4 / 5 !important; max-height: calc(100vh - 210px); margin:0 auto; border:1px solid rgba(23,37,34,.08); border-radius:2px !important; background:#e3e5df !important; isolation:isolate; }
+        .carousel-slides { position:absolute; inset:0; z-index:1; }
+        .carousel-slide { position:absolute; inset:0; display:grid; place-items:center; visibility:hidden; opacity:0; background:linear-gradient(145deg,#e0e3dd,#f1f2ed); transform:translate3d(2%,0,0); transition:opacity .12s linear, transform .12s ease-out, visibility 0s linear .12s; }
+        .carousel-slide.is-active { visibility:visible; opacity:1; transform:translate3d(0,0,0); transition-delay:0s; }
+        .carousel-slide::before { content:''; position:absolute; inset:0; background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.42) 49%,transparent 63%); background-size:230% 100%; animation:carousel-loading 1.25s linear infinite; opacity:.7; }
+        .carousel-slide.is-loaded::before { opacity:0; animation:none; transition:opacity .18s ease; }
+        .carousel-slide img { position:relative; z-index:1; width:100%; height:100%; display:block; object-fit:contain; opacity:0; transition:opacity .16s linear; }
+        .carousel-slide.is-loaded img { opacity:1; }
+        .carousel-loading-text { position:relative; z-index:0; color:#8d9892; font-size:11px; letter-spacing:.08em; }
+        .carousel-slide.is-loaded .carousel-loading-text { display:none; }
+        .carousel-status { position:absolute; z-index:5; top:12px; left:50%; min-width:48px; padding:5px 9px; color:#fff; border:1px solid rgba(255,255,255,.28); border-radius:999px; background:rgba(18,32,30,.48); backdrop-filter:blur(8px); transform:translateX(-50%); text-align:center; font-size:10px; letter-spacing:.08em; pointer-events:none; }
+        @keyframes carousel-loading { from { background-position:210% 0; } to { background-position:-30% 0; } }
+        .carousel-arrow { z-index:7; width:42px !important; height:42px !important; color:var(--ink); border:1px solid rgba(23,37,34,.08); background:rgba(255,254,250,.86) !important; box-shadow:0 8px 26px rgba(0,0,0,.16) !important; backdrop-filter:blur(8px); cursor:pointer; transition:all .22s ease; }
         .carousel-arrow:hover { color:#fff; background:var(--blue-deep) !important; transform:translateY(-50%) scale(1.05) !important; }
         .carousel-indicator { width:7px; height:7px; padding:0; border:1px solid rgba(255,255,255,.75); border-radius:999px; background:rgba(255,255,255,.42); cursor:pointer; }
         .carousel-indicator.active { width:24px; background:#fff; }
+        #carouselIndicators { z-index:7; }
         .detail-thumbnails { margin-top:13px; padding-bottom:0 !important; }
         .carousel-thumbnail { width:58px; min-width:58px; height:68px; padding:0; overflow:hidden; border:1px solid transparent; border-radius:1px; background:#d8ddd8; cursor:pointer; opacity:.63; transition:all .22s ease; }
         .carousel-thumbnail:hover, .carousel-thumbnail.active { border-color:var(--blue); opacity:1; transform:translateY(-2px); }
-        .carousel-thumbnail img { width:100%; height:100%; object-fit:cover; }
+        .carousel-thumbnail { position:relative; flex:none; }
+        .carousel-thumbnail::before { content:''; position:absolute; inset:0; background:linear-gradient(120deg,#d7dbd5,#eef0eb,#d7dbd5); background-size:200% 100%; animation:carousel-loading 1.4s linear infinite; }
+        .carousel-thumbnail.is-loaded::before { display:none; }
+        .carousel-thumbnail img { position:relative; width:100%; height:100%; display:block; object-fit:cover; opacity:0; transition:opacity .15s linear; }
+        .carousel-thumbnail.is-loaded img { opacity:1; }
         .detail-info { display:flex; flex-direction:column; justify-content:center; padding:34px 38px 38px; }
         .detail-info > div:first-child > div { gap:7px !important; }
         #modalCategory1, #modalCategory2 { padding:6px 10px !important; border-radius:999px !important; font-size:10px !important; }
@@ -372,22 +388,50 @@
 
         @media (max-width: 1100px) { .products-grid:not(.hidden) { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
         @media (max-width: 820px) {
-            .detail-stage { padding:10px !important; }
-            .detail-dialog { width:100% !important; height:calc(100dvh - 20px); max-height:calc(100dvh - 20px) !important; }
-            .detail-header { position:sticky; top:0; z-index:12; flex:none; min-height:70px; padding:12px 14px 12px 18px !important; }
-            .detail-header h3 { max-width:calc(100vw - 105px); font-size:18px !important; }
-            .detail-content { overflow-x:hidden !important; overflow-y:auto !important; }
+            .detail-stage { padding:0 !important; }
+            .detail-dialog { width:100% !important; height:100dvh; max-height:100dvh !important; border:0; border-radius:0 !important; }
+            .detail-header { position:sticky; top:0; z-index:12; flex:none; min-height:64px; padding:10px max(14px, env(safe-area-inset-right)) 10px max(16px, env(safe-area-inset-left)) !important; }
+            .detail-header > div > span { margin-bottom:3px; }
+            .detail-header h3 { max-width:calc(100vw - 88px); font-size:17px !important; }
+            .detail-close { width:44px; height:44px; flex:none; }
+            .detail-content { overflow-x:hidden !important; overflow-y:auto !important; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; }
             .detail-layout { display:grid !important; grid-template-columns:minmax(0,1fr) !important; }
-            .detail-gallery { width:100%; min-width:0; padding:14px; }
-            .detail-image-stage { width:100%; max-height:none; aspect-ratio:4 / 5 !important; }
-            .detail-thumbnails { margin-top:9px; }
-            .carousel-thumbnail { width:49px; min-width:49px; height:57px; }
-            .detail-info { width:100%; padding:24px 20px 30px; }
+            .detail-gallery { width:100%; min-width:0; padding:10px 10px 12px; }
+            .detail-image-stage { width:100%; max-height:none; aspect-ratio:1 / 1 !important; }
+            .detail-thumbnails { margin-top:8px; scroll-snap-type:x proximity; }
+            .carousel-thumbnail { width:54px; min-width:54px; height:54px; scroll-snap-align:center; }
+            .carousel-arrow { width:46px !important; height:46px !important; }
+            .carousel-prev { left:8px !important; }
+            .carousel-next { right:8px !important; }
+            .detail-info { width:100%; padding:22px 18px calc(30px + env(safe-area-inset-bottom)); }
             .detail-info.space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top:18px; }
-            .qr-dialog { width:min(100%,380px) !important; }
+            .detail-buy { min-height:52px; }
+            .qr-stage { align-items:flex-end !important; padding:0 !important; }
+            .qr-dialog { width:100% !important; max-width:none !important; border:0; border-radius:18px 18px 0 0 !important; padding-bottom:env(safe-area-inset-bottom); }
         }
         @media (max-width: 720px) { .products-grid:not(.hidden) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap:12px; } .product-body { padding:13px 12px 14px; } .product-name { font-size:14px; } .product-price { font-size:18px; } .product-sales { font-size:9px; } .product-quick { display:none; } .list-image-wrap { width:112px; min-width:112px; } .list-name { font-size:17px; } }
-        @media (max-width: 480px) { .catalog-search-row { gap:8px; } #viewModeBtn { width:48px; min-width:48px; } .catalog-categories > div:first-child { align-items:flex-end; } .category-hint { display:none; } .editorial-main > .mb-8:first-child > p:last-child { display:none; } .results-toolbar { padding:10px 0; } .sort-control span { display:none; } #sortSelect { min-width:116px; } .products-grid:not(.hidden) { grid-template-columns: repeat(2, minmax(0,1fr)); } .list-product { gap:11px; padding:9px; } .list-image-wrap { width:90px; min-width:90px; } .list-name { font-size:15px; } .list-desc { display:none; } .detail-dialog { border-radius:2px !important; } .detail-gallery { padding:10px; } .detail-info { padding:22px 16px 27px; } .detail-facts { padding:16px !important; } .detail-service-note { font-size:9px; } .qr-stage { padding:10px !important; } .qr-dialog { width:100% !important; } .qr-content { padding:20px 24px 27px !important; } }
+        @media (max-width: 480px) {
+            .catalog-search-row { gap:8px; }
+            #viewModeBtn { width:48px; min-width:48px; }
+            .catalog-categories > div:first-child { align-items:flex-end; }
+            .category-hint, .editorial-main > .mb-8:first-child > p:last-child, .sort-control span { display:none; }
+            .results-toolbar { padding:10px 0; }
+            #sortSelect { min-width:112px; }
+            .products-grid:not(.hidden) { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+            .product-body { padding:12px 10px 13px; }
+            .product-meta { margin-bottom:7px; }
+            .product-meta span:last-child { display:none; }
+            .product-foot { margin-top:13px; }
+            .list-product { gap:11px; padding:9px; }
+            .list-image-wrap { width:90px; min-width:90px; }
+            .list-name { font-size:15px; }
+            .list-desc { display:none; }
+            .detail-gallery { padding:8px 8px 10px; }
+            .detail-info { padding:20px 16px calc(26px + env(safe-area-inset-bottom)); }
+            .detail-facts { padding:16px !important; }
+            .detail-service-note { font-size:9px; }
+            .qr-content { padding:20px 24px 27px !important; }
+        }
         .card-shadow {
             box-shadow: 0 10px 32px rgba(29, 43, 39, 0.08);
         }
@@ -462,26 +506,35 @@
             .value-item:last-child { grid-column: 1 / -1; }
         }
         @media (max-width: 600px) {
-            .site-header { height: 68px; }
+            .site-header { height: 64px; }
             .header-inner { width: calc(100% - 28px); }
-            .brand-seal { width: 39px; height: 39px; font-size: 20px; }
-            .brand-name { font-size: 17px; }
-            .hero, .hero-inner { min-height: 585px; }
+            .brand { gap:10px; }
+            .brand-seal { width:37px; height:37px; font-size:19px; }
+            .brand-name { font-size:16px; }
+            .brand-en { margin-top:3px; font-size:8px; letter-spacing:.16em; }
+            .mobile-menu-btn { width:44px; height:44px; margin-right:-8px; }
+            .mobile-nav { left:10px; right:10px; top:59px; border-radius:3px; }
+            .mobile-nav a, .mobile-nav button { min-height:48px; }
+            .hero, .hero-inner { min-height:520px; }
             .hero-media img { object-position: 62% 50%; }
             .hero-media::after { background: linear-gradient(90deg, rgba(8,16,15,.86), rgba(8,16,15,.4)), linear-gradient(0deg, rgba(8,16,15,.72), transparent 60%); }
-            .hero-inner { width: calc(100% - 32px); align-items: flex-end; padding-bottom: 78px; }
+            .hero-inner { width:calc(100% - 32px); align-items:flex-end; padding:50px 0 66px; }
             .hero-copy { width: 100%; }
-            .hero h1 { font-size: 40px; line-height: 1.3; }
-            .hero-description { font-size: 14px; line-height: 1.8; }
+            .hero-eyebrow { margin-bottom:16px; }
+            .hero h1 { font-size:clamp(33px,10vw,39px); line-height:1.25; }
+            .hero-description { margin:18px 0 24px; font-size:13px; line-height:1.75; }
             .hero-actions { align-items: stretch; }
-            .hero-primary, .hero-secondary { flex: 1; padding: 0 12px; }
+            .hero-primary, .hero-secondary { min-height:46px; flex:1; padding:0 10px; font-size:13px; }
             .hero-index { display: none; }
             .value-strip { width: calc(100% - 28px); margin-top: -28px; }
-            .value-intro, .value-item { min-height: 96px; padding: 19px; }
+            .value-intro, .value-item { min-height:88px; padding:16px; }
             .value-intro { grid-column: 1 / -1; }
             .value-number { font-size: 25px; }
             .value-text span { font-size: 10px; }
-            .editorial-main { padding-top: 68px !important; }
+            .editorial-main { padding-top:52px !important; padding-left:14px !important; padding-right:14px !important; }
+            #searchInput { height:52px; padding-left:44px; padding-right:44px; }
+            #viewModeBtn { min-height:52px; }
+            #categoryContainer .category-filter { min-height:42px; }
             #craft { width: calc(100% - 28px) !important; grid-template-columns: 1fr !important; gap: 22px !important; margin-top: 40px !important; }
             #craft > div:first-child { min-height: 300px !important; }
             .site-footer { margin-top:64px; }
@@ -533,7 +586,7 @@
 
     <section class="hero" aria-labelledby="heroTitle">
         <div class="hero-media">
-            <img src="assets/hero.jpg" alt="景德镇青花瓷器陈设">
+            <img src="assets/hero.jpg" alt="景德镇青花瓷器陈设" width="1800" height="900" fetchpriority="high" decoding="async">
         </div>
         <div class="hero-inner">
             <div class="hero-copy">
@@ -645,8 +698,9 @@
                 <div class="detail-content flex-1 overflow-y-auto p-4 sm:p-6">
                     <div class="detail-layout grid grid-cols-1 lg:grid-cols-2 gap-6">
                         <div class="detail-gallery space-y-4">
-                            <div class="detail-image-stage relative aspect-square bg-stone-100 rounded-xl overflow-hidden">
-                                <img id="carouselMainImg" alt="" class="detail-main-image w-full h-full object-contain">
+                            <div id="carouselStage" class="detail-image-stage relative aspect-square bg-stone-100 rounded-xl overflow-hidden" role="group" aria-label="商品图片轮播">
+                                <div id="carouselSlides" class="carousel-slides" aria-live="polite"></div>
+                                <span id="carouselStatus" class="carousel-status" aria-hidden="true"></span>
                                 <button id="prevBtn" class="carousel-arrow carousel-prev absolute left-3 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-colors" type="button" aria-label="上一张图片">
                                     <svg class="w-5 h-5 text-stone-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -732,7 +786,7 @@
                 </div>
                 
                 <div class="qr-content p-6 text-center">
-                    <img src="qrcode.jpg" 
+                    <img src="qrcode.jpg" loading="lazy" decoding="async"
                          alt="扫码加好友下单" 
                          class="w-full max-w-[280px] mx-auto rounded-xl shadow-lg mb-4">
                     <p class="text-stone-600 mb-2">长按二维码识别，或使用微信扫一扫</p>
@@ -745,10 +799,10 @@
     <section id="craft" style="width:min(1160px,calc(100% - 48px));margin:60px auto 0;padding:0 0 24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,6vw,84px);align-items:center;">
         <div style="position:relative;min-height:360px;">
             <div style="position:absolute;inset:24px 42px 0 0;overflow:hidden;background:#d8d7cf;box-shadow:0 18px 45px rgba(23,37,34,.12);">
-                <img src="assets/products/231.jpg" alt="手绘茶具细节" style="width:100%;height:100%;object-fit:cover;">
+                <img src="assets/products/231.jpg" alt="手绘茶具细节" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;">
             </div>
             <div style="position:absolute;right:0;bottom:0;width:42%;height:46%;overflow:hidden;border:10px solid var(--paper-light);background:#d9d3c5;box-shadow:0 15px 35px rgba(23,37,34,.15);">
-                <img src="assets/products/148.jpg" alt="玲珑餐具细节" style="width:100%;height:100%;object-fit:cover;">
+                <img src="assets/products/148.jpg" alt="玲珑餐具细节" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;">
             </div>
             <span style="position:absolute;left:-8px;top:4px;color:var(--red);font:500 46px/1 'Noto Serif SC',serif;writing-mode:vertical-rl;letter-spacing:.08em;">窑火不息</span>
         </div>
@@ -788,6 +842,12 @@
         let currentCarouselIndex = 0;
         let currentProductImages = [];
         let currentProduct = null;
+        let carouselGeneration = 0;
+        let carouselThumbnailObserver = null;
+        let carouselTouchStart = null;
+        let carouselState = { slides:[], indicators:[], thumbnails:[] };
+        let detailModalOpener = null;
+        let qrcodeModalOpener = null;
 
         const $ = (selector, root = document) => root.querySelector(selector);
         const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
@@ -844,16 +904,25 @@
             return [local || fallbackImage(product)];
         }
 
+        function optimizedImageSource(source, width) {
+            const value = String(source || '');
+            if (!/^https:\/\/si\.geilicdn\.com\//i.test(value)) return value;
+            const safeWidth = Math.max(120, Math.min(1600, Math.round(width || 720)));
+            return `${value}${value.includes('?') ? '&' : '?'}w=${safeWidth}`;
+        }
+
         function mountImage(img, product, source) {
             const fallback = fallbackImage(product);
             img.referrerPolicy = 'no-referrer';
-            img.loading = img.loading || 'lazy';
+            img.decoding = 'async';
+            if (!img.hasAttribute('loading')) img.loading = 'lazy';
+            if (!img.hasAttribute('fetchpriority')) img.fetchPriority = 'low';
             img.onerror = () => {
                 if (img.dataset.fallback === 'true') return;
                 img.dataset.fallback = 'true';
                 img.src = fallback;
             };
-            img.src = source || fallback;
+            img.src = optimizedImageSource(source, 720) || fallback;
         }
 
         function setVisible(element, visible) {
@@ -927,7 +996,10 @@
             const source = imageSources(product)[0];
             const head = formatHeadCount(product['头数']);
             card.innerHTML = `<div class="product-image-wrap"><span class="product-index">${String(position + 1).padStart(2, '0')}</span><span class="product-badge">${escapeHtml(head)}</span><img class="product-image" alt="${escapeHtml(product['产品名'])}" /><span class="product-quick" aria-hidden="true"><svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M2.8 12s3.2-5 9.2-5 9.2 5 9.2 5-3.2 5-9.2 5-9.2-5-9.2-5Z"></path><circle cx="12" cy="12" r="2.2"></circle></svg></span></div><div class="product-body"><div class="product-meta"><span>${escapeHtml(product['二级分类'] || '经典系列')}</span><span>${escapeHtml(product['一级分类'] || '')}</span></div><h3 class="product-name">${escapeHtml(String(product['产品名'] || '').trim())}</h3><div class="product-foot"><span class="product-price"><small>¥</small>${formatPrice(product['价格'])}</span><span class="product-sales">${productStatus(product)}</span></div></div>`;
-            mountImage($('.product-image', card), product, source);
+            const cardImage = $('.product-image', card);
+            cardImage.loading = position < 4 ? 'eager' : 'lazy';
+            cardImage.fetchPriority = position < 4 ? 'high' : 'low';
+            mountImage(cardImage, product, source);
             card.addEventListener('click', () => showDetailModal(product));
             card.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showDetailModal(product); } });
             return card;
@@ -940,7 +1012,10 @@
             item.setAttribute('role', 'button');
             item.setAttribute('aria-label', `查看${product['产品名'] || '器物'}详情`);
             item.innerHTML = `<div class="list-image-wrap"><img class="list-image" alt="${escapeHtml(product['产品名'])}" /></div><div class="list-body"><div><div class="product-meta"><span>${escapeHtml(product['一级分类'] || '')}</span><span>${escapeHtml(product['二级分类'] || '')}</span></div><h3 class="list-name">${escapeHtml(String(product['产品名'] || '').trim())}</h3><p class="list-desc">${escapeHtml(formatHeadCount(product['头数']))} · 景德镇优质陶瓷 · 传统手工制作</p></div><div class="list-foot"><span class="product-price"><small>¥</small>${formatPrice(product['价格'])}</span><span class="product-sales">${productStatus(product)}</span></div></div>`;
-            mountImage($('.list-image', item), product, imageSources(product)[0]);
+            const listImage = $('.list-image', item);
+            listImage.loading = position < 5 ? 'eager' : 'lazy';
+            listImage.fetchPriority = position < 5 ? 'high' : 'low';
+            mountImage(listImage, product, imageSources(product)[0]);
             item.addEventListener('click', () => showDetailModal(product));
             item.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showDetailModal(product); } });
             return item;
@@ -989,6 +1064,7 @@
         }
 
         function showDetailModal(product) {
+            detailModalOpener = document.activeElement;
             currentProduct = product;
             currentProductImages = imageSources(product);
             currentCarouselIndex = 0;
@@ -1001,51 +1077,191 @@
             renderCarousel();
             setVisible($('#detailModal'), true);
             updateBodyLock();
+            requestAnimationFrame(() => $('#closeModalBtn')?.focus({ preventScroll: true }));
         }
 
         function hideDetailModal() {
             setVisible($('#detailModal'), false);
             updateBodyLock();
+            if (detailModalOpener instanceof HTMLElement) detailModalOpener.focus({ preventScroll: true });
+            detailModalOpener = null;
+        }
+
+        function startCarouselImage(img, owner, source, generation, priority = 'low', targetWidth = 1400) {
+            if (!img || img.dataset.started === 'true' || generation !== carouselGeneration) return;
+            img.dataset.started = 'true';
+            img.referrerPolicy = 'no-referrer';
+            img.decoding = 'async';
+            img.loading = priority === 'high' ? 'eager' : 'lazy';
+            img.fetchPriority = priority;
+            const fallback = fallbackImage(currentProduct || {});
+            img.onload = () => owner.classList.add('is-loaded');
+            img.onerror = () => {
+                if (img.dataset.fallback === 'true') {
+                    owner.classList.add('is-loaded');
+                    return;
+                }
+                img.dataset.fallback = 'true';
+                img.src = fallback;
+            };
+            img.src = optimizedImageSource(source, targetWidth) || fallback;
+        }
+
+        function ensureCarouselSlide(index, priority = 'high') {
+            const slide = carouselState.slides[index];
+            if (!slide) return;
+            const targetWidth = window.innerWidth <= 820 ? 1100 : 1400;
+            startCarouselImage($('img', slide), slide, currentProductImages[index], carouselGeneration, priority, targetWidth);
+        }
+
+        function ensureCarouselThumbnail(index) {
+            const thumbnail = carouselState.thumbnails[index];
+            if (!thumbnail) return;
+            startCarouselImage($('img', thumbnail), thumbnail, currentProductImages[index], carouselGeneration, 'low', 240);
+        }
+
+        function queueAdjacentCarouselImages(index) {
+            const generation = carouselGeneration;
+            const total = currentProductImages.length;
+            if (total < 2) return;
+            const preload = () => {
+                if (generation !== carouselGeneration) return;
+                ensureCarouselSlide((index + 1) % total, 'low');
+                ensureCarouselSlide((index - 1 + total) % total, 'low');
+            };
+            if ('requestIdleCallback' in window) window.requestIdleCallback(preload, { timeout:900 });
+            else window.setTimeout(preload, 120);
+        }
+
+        function goToSlide(index) {
+            const total = currentProductImages.length;
+            if (!total) return;
+            const nextIndex = (index + total) % total;
+            const previousIndex = currentCarouselIndex;
+            const previousSlide = carouselState.slides[previousIndex];
+            const previousIndicator = carouselState.indicators[previousIndex];
+            const previousThumbnail = carouselState.thumbnails[previousIndex];
+            if (previousSlide) { previousSlide.classList.remove('is-active'); previousSlide.setAttribute('aria-hidden', 'true'); }
+            if (previousIndicator) { previousIndicator.classList.remove('active'); previousIndicator.removeAttribute('aria-current'); }
+            if (previousThumbnail) { previousThumbnail.classList.remove('active'); previousThumbnail.removeAttribute('aria-current'); }
+
+            currentCarouselIndex = nextIndex;
+            const activeSlide = carouselState.slides[nextIndex];
+            const activeIndicator = carouselState.indicators[nextIndex];
+            const activeThumbnail = carouselState.thumbnails[nextIndex];
+            if (activeSlide) { activeSlide.classList.add('is-active'); activeSlide.setAttribute('aria-hidden', 'false'); }
+            if (activeIndicator) { activeIndicator.classList.add('active'); activeIndicator.setAttribute('aria-current', 'true'); }
+            if (activeThumbnail) { activeThumbnail.classList.add('active'); activeThumbnail.setAttribute('aria-current', 'true'); }
+            $('#carouselStatus').textContent = `${nextIndex + 1} / ${total}`;
+            $('#carouselStage').setAttribute('aria-label', `${currentProduct?.['产品名'] || '商品'}图片，第 ${nextIndex + 1} 张，共 ${total} 张`);
+
+            const generation = carouselGeneration;
+            requestAnimationFrame(() => {
+                if (generation !== carouselGeneration) return;
+                ensureCarouselSlide(nextIndex, 'high');
+                ensureCarouselThumbnail(nextIndex);
+                activeThumbnail?.scrollIntoView({ block:'nearest', inline:'nearest', behavior:'auto' });
+                queueAdjacentCarouselImages(nextIndex);
+            });
         }
 
         function renderCarousel() {
-            const mainImg = $('#carouselMainImg');
-            const indicators = $('#carouselIndicators');
-            const thumbnails = $('#carouselThumbnails');
+            carouselGeneration += 1;
+            carouselThumbnailObserver?.disconnect();
+            const generation = carouselGeneration;
+            const slidesContainer = $('#carouselSlides');
+            const indicatorsContainer = $('#carouselIndicators');
+            const thumbnailsContainer = $('#carouselThumbnails');
             const total = currentProductImages.length;
+            slidesContainer.innerHTML = '';
+            indicatorsContainer.innerHTML = '';
+            thumbnailsContainer.innerHTML = '';
+            carouselState = { slides:[], indicators:[], thumbnails:[] };
             if (!total) return;
-            mainImg.alt = currentProduct?.['产品名'] || '';
-            mountImage(mainImg, currentProduct || {}, currentProductImages[currentCarouselIndex]);
-            $('#prevBtn').hidden = total < 2;
-            $('#nextBtn').hidden = total < 2;
-            indicators.innerHTML = '';
+
             currentProductImages.forEach((_, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                slide.setAttribute('aria-hidden', 'true');
+                const image = document.createElement('img');
+                image.alt = `${currentProduct?.['产品名'] || '商品'}第 ${index + 1} 张图片`;
+                const loadingText = document.createElement('span');
+                loadingText.className = 'carousel-loading-text';
+                loadingText.textContent = '图片加载中';
+                slide.append(image, loadingText);
+                slidesContainer.appendChild(slide);
+
                 const indicator = document.createElement('button');
                 indicator.type = 'button';
-                indicator.className = `carousel-indicator ${index === currentCarouselIndex ? 'active' : ''}`;
+                indicator.className = 'carousel-indicator';
                 indicator.setAttribute('aria-label', `查看第 ${index + 1} 张图片`);
-                indicator.addEventListener('click', () => { currentCarouselIndex = index; renderCarousel(); });
-                indicators.appendChild(indicator);
-            });
-            thumbnails.innerHTML = '';
-            currentProductImages.forEach((source, index) => {
+                indicator.addEventListener('click', () => goToSlide(index));
+                indicatorsContainer.appendChild(indicator);
+
                 const thumbnail = document.createElement('button');
                 thumbnail.type = 'button';
-                thumbnail.className = `carousel-thumbnail ${index === currentCarouselIndex ? 'active' : ''}`;
-                const image = document.createElement('img');
-                image.alt = '';
-                mountImage(image, currentProduct || {}, source);
-                thumbnail.appendChild(image);
-                thumbnail.addEventListener('click', () => { currentCarouselIndex = index; renderCarousel(); });
-                thumbnails.appendChild(thumbnail);
+                thumbnail.className = 'carousel-thumbnail';
+                thumbnail.setAttribute('aria-label', `查看第 ${index + 1} 张图片`);
+                const thumbnailImage = document.createElement('img');
+                thumbnailImage.alt = '';
+                thumbnailImage.dataset.carouselIndex = String(index);
+                thumbnail.appendChild(thumbnailImage);
+                thumbnail.addEventListener('click', () => goToSlide(index));
+                thumbnailsContainer.appendChild(thumbnail);
+
+                carouselState.slides.push(slide);
+                carouselState.indicators.push(indicator);
+                carouselState.thumbnails.push(thumbnail);
+            });
+
+            $('#prevBtn').hidden = total < 2;
+            $('#nextBtn').hidden = total < 2;
+            $('#carouselIndicators').hidden = total < 2;
+            currentCarouselIndex = 0;
+
+            if ('IntersectionObserver' in window) {
+                carouselThumbnailObserver = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (!entry.isIntersecting || generation !== carouselGeneration) return;
+                        const index = numeric(entry.target.dataset.carouselIndex);
+                        ensureCarouselThumbnail(index);
+                        carouselThumbnailObserver?.unobserve(entry.target);
+                    });
+                }, { root:thumbnailsContainer, rootMargin:'0px 160px' });
+                carouselState.thumbnails.forEach(thumbnail => carouselThumbnailObserver.observe($('img', thumbnail)));
+            } else {
+                carouselState.thumbnails.slice(0, 8).forEach((_, index) => ensureCarouselThumbnail(index));
+            }
+            goToSlide(0);
+        }
+
+        function prevSlide() { if (currentProductImages.length > 1) goToSlide(currentCarouselIndex - 1); }
+        function nextSlide() { if (currentProductImages.length > 1) goToSlide(currentCarouselIndex + 1); }
+
+        function showQrcodeModal() {
+            qrcodeModalOpener = document.activeElement;
+            setVisible($('#qrcodeModal'), true);
+            updateBodyLock();
+            requestAnimationFrame(() => $('#closeQrcodeBtn')?.focus({ preventScroll: true }));
+        }
+
+        function hideQrcodeModal() {
+            setVisible($('#qrcodeModal'), false);
+            updateBodyLock();
+            if (qrcodeModalOpener instanceof HTMLElement) qrcodeModalOpener.focus({ preventScroll: true });
+            qrcodeModalOpener = null;
+        }
+
+        function bindOutsideDismiss(modal, dialogSelector, dismiss) {
+            modal.addEventListener('click', event => {
+                if (!event.target.closest(dialogSelector)) dismiss();
             });
         }
 
-        function prevSlide() { if (currentProductImages.length > 1) { currentCarouselIndex = (currentCarouselIndex - 1 + currentProductImages.length) % currentProductImages.length; renderCarousel(); } }
-        function nextSlide() { if (currentProductImages.length > 1) { currentCarouselIndex = (currentCarouselIndex + 1) % currentProductImages.length; renderCarousel(); } }
-
-        function showQrcodeModal() { setVisible($('#qrcodeModal'), true); updateBodyLock(); }
-        function hideQrcodeModal() { setVisible($('#qrcodeModal'), false); updateBodyLock(); }
+        function closeMobileNav() {
+            $('#mobileNav').classList.remove('open');
+            $('#mobileMenuBtn').setAttribute('aria-expanded', 'false');
+        }
 
         document.addEventListener('DOMContentLoaded', () => {
             loadProducts();
@@ -1065,14 +1281,33 @@
                 const isOpen = nav.classList.toggle('open');
                 $('#mobileMenuBtn').setAttribute('aria-expanded', String(isOpen));
             });
-            $$('#mobileNav a, #mobileNav button').forEach(link => link.addEventListener('click', () => { $('#mobileNav').classList.remove('open'); $('#mobileMenuBtn').setAttribute('aria-expanded', 'false'); }));
+            $$('#mobileNav a, #mobileNav button').forEach(link => link.addEventListener('click', closeMobileNav));
             $('#closeModalBtn').addEventListener('click', hideDetailModal);
-            $('#modalOverlay').addEventListener('click', hideDetailModal);
             $('#prevBtn').addEventListener('click', prevSlide);
             $('#nextBtn').addEventListener('click', nextSlide);
+            $('#carouselStage').addEventListener('touchstart', event => {
+                const touch = event.touches[0];
+                carouselTouchStart = touch ? { x:touch.clientX, y:touch.clientY } : null;
+            }, { passive:true });
+            $('#carouselStage').addEventListener('touchend', event => {
+                if (!carouselTouchStart) return;
+                const touch = event.changedTouches[0];
+                const deltaX = touch.clientX - carouselTouchStart.x;
+                const deltaY = touch.clientY - carouselTouchStart.y;
+                carouselTouchStart = null;
+                if (Math.abs(deltaX) < 46 || Math.abs(deltaX) <= Math.abs(deltaY) * 1.2) return;
+                deltaX < 0 ? nextSlide() : prevSlide();
+            }, { passive:true });
+            $('#carouselStage').addEventListener('touchcancel', () => { carouselTouchStart = null; }, { passive:true });
             $('#buyBtn').addEventListener('click', showQrcodeModal);
             $('#closeQrcodeBtn').addEventListener('click', hideQrcodeModal);
-            $('#qrcodeOverlay').addEventListener('click', hideQrcodeModal);
+            bindOutsideDismiss($('#detailModal'), '.detail-dialog', hideDetailModal);
+            bindOutsideDismiss($('#qrcodeModal'), '.qr-dialog', hideQrcodeModal);
+            document.addEventListener('pointerdown', event => {
+                const nav = $('#mobileNav');
+                const toggle = $('#mobileMenuBtn');
+                if (nav.classList.contains('open') && !nav.contains(event.target) && !toggle.contains(event.target)) closeMobileNav();
+            }, { passive:true });
             window.addEventListener('scroll', () => $('#siteHeader')?.classList.toggle('is-scrolled', window.scrollY > 12), { passive: true });
         });
 
@@ -1080,6 +1315,7 @@
             if (event.key === '/' && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') { event.preventDefault(); $('#searchInput')?.focus(); }
             if (isOpen($('#qrcodeModal'))) { if (event.key === 'Escape') hideQrcodeModal(); return; }
             if (isOpen($('#detailModal'))) { if (event.key === 'Escape') hideDetailModal(); if (event.key === 'ArrowLeft') prevSlide(); if (event.key === 'ArrowRight') nextSlide(); }
+            if (event.key === 'Escape' && $('#mobileNav')?.classList.contains('open')) closeMobileNav();
         });
     </script>
 </body>
